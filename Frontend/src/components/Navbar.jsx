@@ -216,7 +216,7 @@ export default function Navbar() {
                       {activeItem?.text || whoWeAre[0].text}
                     </p>
                   </div>
-                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-64 mt-4 md:mt-0">
+                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-72 mt-4 md:mt-0">
                     <img
                       src={activeItem?.image || whoWeAre[0].image}
                       alt="who we are"
@@ -263,7 +263,7 @@ export default function Navbar() {
                       {activeItem?.text || whatWeDo[0].text}
                     </p>
                   </div>
-                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-64 mt-4 md:mt-0">
+                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-72 mt-4 md:mt-0">
                     <img
                       src={activeItem?.image || whatWeDo[0].image}
                       alt="What We Do"
@@ -310,7 +310,7 @@ export default function Navbar() {
                       {activeItem?.text || ResourceHub[0].text}
                     </p>
                   </div>
-                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-64 mt-4 md:mt-0">
+                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-72 mt-4 md:mt-0">
                     <img
                       src={activeItem?.image || ResourceHub[0].image}
                       alt="Resource Hub"
@@ -357,7 +357,7 @@ export default function Navbar() {
                       {activeItem?.text || GetInvolved[0].text}
                     </p>
                   </div>
-                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-64 mt-4 md:mt-0">
+                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-72 mt-4 md:mt-0">
                     <img
                       src={activeItem?.image || GetInvolved[0].image}
                       alt="Get Involved"
