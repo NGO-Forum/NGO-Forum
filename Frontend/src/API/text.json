@@ -1,0 +1,47 @@
+{
+  "executiveDirector": {
+    "name": "SOEUNG Saroeun",
+    "position": "Executive Director"
+  },
+  "departments": [
+    {
+      "manager": {
+        "name": "CHAN Vicheth",
+        "position": "RITI Program Manager"
+      },
+      "staff": [
+        { "name": "SOUN Borey", "position": "Program and Communication Assistant" },
+        { "name": "CHHAY Bunna", "position": "IT Assistant" }
+      ]
+    },
+    {
+      "manager": {
+        "name": "MAR Sophal",
+        "position": "PALI Program Manager"
+      },
+      "staff": [
+        { "name": "ROMAS Oeun", "position": "PALI Intern" }
+      ]
+    },
+    {
+      "manager": {
+        "name": "OUM Somaly",
+        "position": "SACHAS Program Manager"
+      },
+      "staff": [
+        { "name": "CHEN Socheoun", "position": "Network Coordinator" },
+        { "name": "KONG Sereymongkol", "position": "Assistant" }
+      ]
+    },
+    {
+      "manager": {
+        "name": "SOM Chettana",
+        "position": "Finance & Operation Manager"
+      },
+      "staff": [
+        { "name": "LIN Leaksopor", "position": "Finance & Admin Assistant" },
+        { "name": "RIDD Chansoksreynich", "position": "HR & Admin Assistant" }
+      ]
+    }
+  ]
+}
