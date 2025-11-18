@@ -24,7 +24,7 @@ class PostController extends Controller
             return $query->take((int) $limit)->get();
         }
 
-        return $query->paginate(10);
+        return $query->paginate(9);
     }
 
     // GET /api/posts/{id}

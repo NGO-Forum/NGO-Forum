@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { api } from "../API/api";
 
 export default function OrganizationalStructure() {
@@ -40,6 +40,56 @@ export default function OrganizationalStructure() {
       ...data.macor,
       ...data.executiveDirector,
     ];
+  };
+
+  // UNIVERSAL ROLE SORTING FOR ALL PROGRAMS
+  const sortByRolePriority = (list) => {
+    const priority = [
+      "manager",
+      "coordinator",
+      "specialist",
+      "officer",
+      "assistant",
+      "admin",
+      "janitor",
+      "intern",
+    ];
+
+    const getRank = (role = "") => {
+      role = role.toLowerCase();
+
+      for (let i = 0; i < priority.length; i++) {
+        if (role.includes(priority[i])) return i;
+      }
+
+      return 999; // fallback lowest priority
+    };
+
+    return [...list].sort((a, b) => getRank(a.role) - getRank(b.role));
+  };
+
+  // SORT STAFF ONLY (NOT MANAGERS)
+  const sortStaffRole = (list) => {
+    const priority = [
+      "coordinator",
+      "specialist",
+      "officer",
+      "assistant",
+      "admin",
+      "janitor",
+      "intern",
+    ];
+
+    const getRank = (role = "") => {
+      role = role.toLowerCase();
+
+      for (let i = 0; i < priority.length; i++) {
+        if (role.includes(priority[i])) return i;
+      }
+      return 999; // roles not matched go last
+    };
+
+    return [...list].sort((a, b) => getRank(a.role) - getRank(b.role));
   };
 
   // BUILD DEPARTMENTS AUTOMATICALLY
@@ -293,7 +343,7 @@ export default function OrganizationalStructure() {
           {/* ---------- DIRECTORS LIST ---------- */}
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
-            {sortManagersFirst(data.pili).map((d, i) => (
+            {sortByRolePriority(data.pili).map((d, i) => (
               <div key={i} className="flex flex-col items-center justify-center">
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
@@ -328,7 +378,7 @@ export default function OrganizationalStructure() {
           {/* ---------- DIRECTORS LIST ---------- */}
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
-            {sortManagersFirst(data.sachas).map((d, i) => (
+            {sortByRolePriority(data.sachas).map((d, i) => (
               <div key={i} className="flex flex-col items-center justify-center">
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
@@ -363,7 +413,7 @@ export default function OrganizationalStructure() {
           {/* ---------- DIRECTORS LIST ---------- */}
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
-            {sortManagersFirst(data.riti).map((d, i) => (
+            {sortByRolePriority(data.riti).map((d, i) => (
               <div key={i} className="flex flex-col items-center justify-center">
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
@@ -398,7 +448,7 @@ export default function OrganizationalStructure() {
           {/* ---------- DIRECTORS LIST ---------- */}
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
-            {sortManagersFirst(data.macor).map((d, i) => (
+            {sortByRolePriority(data.macor).map((d, i) => (
               <div key={i} className="flex flex-col items-center justify-center">
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
@@ -472,7 +522,7 @@ export default function OrganizationalStructure() {
 
                   {/* Staff */}
                   <div className="mt-2">
-                    {dept.staff.map((s, idx) => (
+                    {sortStaffRole(dept.staff).map((s, idx) => (
                       <div key={idx} className="mt-4">
                         <div className="hidden md:block h-10 w-px bg-black mx-auto mb-2"></div>
                         <p className="font-bold text-[#899616] text-lg">{s.name}</p>
@@ -480,7 +530,6 @@ export default function OrganizationalStructure() {
                       </div>
                     ))}
                   </div>
-
                 </div>
               ))}
             </div>

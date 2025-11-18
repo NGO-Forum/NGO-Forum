@@ -11,11 +11,14 @@ export default function PostAdmin() {
   const [showDelete, setShowDelete] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
 
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+
   const loadPosts = async () => {
     try {
-      const res = await api.get("/posts");
-      const items = res.data.data || res.data;
-      setPosts(items);
+      const res = await api.get("/posts", { params: { page } });
+      setPosts(res.data.data);
+      setLastPage(res.data.last_page);
     } catch (err) {
       console.error("Failed to load posts", err);
     }
@@ -23,7 +26,7 @@ export default function PostAdmin() {
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [page]);
 
   const handleNew = () => {
     setEditingPost(null);
@@ -48,7 +51,6 @@ export default function PostAdmin() {
     setShowDelete(false);
     setDeleteItem(null);
   };
-
 
   const imgUrl = (path) =>
     path ? `http://127.0.0.1:8000/storage/${path}` : "/images/no-image.png";
@@ -123,7 +125,7 @@ export default function PostAdmin() {
                         : "/images/no-image.png"
                     }
                     alt={p.title}
-                    className="h-12 w-16 object-cover rounded-full"
+                    className="h-8 w-8 object-cover rounded-full"
                   />
                 </td>
 
@@ -135,7 +137,6 @@ export default function PostAdmin() {
                     : "-"}
                 </td>
 
-                {/* FIXED description */}
                 <td className="px-4 py-2">
                   {p.description ? p.description.substring(0, 60) + "..." : "-"}
                 </td>
@@ -163,12 +164,41 @@ export default function PostAdmin() {
         </table>
       </div>
 
+      {/* PAGINATION */}
+      <div className="flex justify-center items-center gap-4 mt-6 mb-10">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((prev) => prev - 1)}
+          className="p-2 text-gray-700 text-xl disabled:opacity-30"
+        >
+          ‹‹
+        </button>
+
+        {[...Array(lastPage)].map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            className={`w-10 h-10 rounded-full font-semibold text-lg
+              ${page === i + 1 ? "bg-green-700 text-white" : "bg-white shadow"}`}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          disabled={page === lastPage}
+          onClick={() => setPage((prev) => prev + 1)}
+          className="p-2 text-gray-700 text-xl disabled:opacity-30"
+        >
+          ››
+        </button>
+      </div>
+
       <DeleteConfirmModal
         open={showDelete}
         onClose={() => setShowDelete(false)}
         onConfirm={handleDelete}
       />
-
     </div>
   );
 }
