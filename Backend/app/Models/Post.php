@@ -11,13 +11,15 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'image',
+        'images',
         'description',
         'published_at',
         'department',
+        'link',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'images' => 'array',
     ];
 }

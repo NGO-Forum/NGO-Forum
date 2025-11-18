@@ -51,9 +51,9 @@ export default function DonorSlider() {
 
   return (
     <section>
-      <div className="max-w-8xl mx-auto px-4 md:px-12 flex flex-col md:flex-row items-center gap-4">
+      <div className="max-w-8xl mx-auto px-4 md:px-12 flex items-center gap-4 justify-center">
 
-        <h2 className="text-xl sm:text-2xl md:text-3xl mt-4 md:mt-0 font-bold whitespace-nowrap">
+        <h2 className="text-xl sm:text-2xl md:text-3xl mt-0 font-bold whitespace-nowrap">
           Our Donors
         </h2>
 
@@ -67,7 +67,7 @@ export default function DonorSlider() {
 
         {/* Slider Container */}
         <div ref={sliderRef} // ← correct place
-          className="flex-1 overflow-x-hidden overflow-y-hidden"
+          className="flex-1 overflow-hidden"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}>
           <div

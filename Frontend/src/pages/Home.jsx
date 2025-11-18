@@ -14,7 +14,7 @@ export default function Home() {
 
   const loadPosts = async () => {
     try {
-      const res = await api.get("/posts");
+      const res = await api.get("/posts?limit=8");
       setPosts(res.data.data || res.data);   // supports pagination
     } catch (err) {
       console.error("Failed to load posts:", err);
@@ -317,10 +317,10 @@ export default function Home() {
       </section>
 
       {/* ===================== RECENT NEWS SECTION ===================== */}
-      <section className="py-16 bg-white">
+      <section className="py-6 bg-white">
         <div className="max-w-8xl mx-auto px-6 lg:px-12">
 
-          <h2 className="text-3xl font-bold text-gray-800 mb-10">
+          <h2 className="text-lg lg:text-3xl font-bold text-gray-800 lg:mb-10 mb-4">
             Recent News
           </h2>
 

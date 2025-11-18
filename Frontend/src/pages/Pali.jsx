@@ -1,6 +1,24 @@
 import React from "react";
-
+import { useEffect, useState } from "react";
+import { api } from "../API/api";
+import PostCard from "../components/PostCard";
 export default function PaliPage() {
+
+  const [posts, setPosts] = useState([]);
+  
+    useEffect(() => {
+      loadPosts();
+    }, []);
+  
+    const loadPosts = async () => {
+      try {
+        const res = await api.get("/posts?department=PALI");
+        setPosts(res.data.data || res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
   return (
     <div className="w-full bg-white text-gray-800">
 
@@ -58,7 +76,7 @@ export default function PaliPage() {
 
           {/* ---- BWG ---- */}
           <h3 className="text-lg lg:text-xl font-bold text-green-700 mb-2">
-            Budget Working Group (BWG) 
+            Budget Working Group (BWG)
           </h3>
           <p className="mb-8">
             BWG is a coalition of 20 local and international NGOs working on budget-related policies coordinated by the NGO Forum on Cambodia (NGO Forum). The Group has been engaged in public budget advocacy for several years since 2016. The group advocacy aims to produce credible evidence through budget analysis, research and mainly open budget survey to influence the Royal Government of Cambodia (RGC) to increase budget allocation toward poor and vulnerable population and to improve budget transparency.
@@ -66,7 +84,7 @@ export default function PaliPage() {
 
           {/* ---- RCC ---- */}
           <h3 className="text-lg lg:text-xl font-bold text-green-700 mb-2">
-            Rivers Coalition in Cambodia (RCC) 
+            Rivers Coalition in Cambodia (RCC)
           </h3>
           <p className="mb-6">
             RCC envisions that existing and future hydropower dam projects respect the rights of the affected people and ensures the sustainability of the environment and livelihoods.  In order to achieve this, RCC believes that public participation in the planning and decision making process is essential in order to guarantee that the interests, needs, and benefits of affected people are included as well as addressed.
@@ -74,6 +92,23 @@ export default function PaliPage() {
         </div>
       </div>
 
+      {/* ===================== RECENT NEWS SECTION ===================== */}
+      <section className="py-8 bg-white">
+        <div className="max-w-8xl mx-auto px-6 lg:px-12">
+
+          <h2 className="text-lg lg:text-3xl font-bold text-gray-800 lg:mb-10 mb-4">
+            Program Achievements
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            {posts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+
+          </div>
+        </div>
+      </section>
 
     </div>
   );

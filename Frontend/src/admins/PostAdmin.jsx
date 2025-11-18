@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { api } from "../API/api";
 import PostForm from "./components/PostForm";
+import MenuButton from "./components/MenuButton";
+import DeleteConfirmModal from "./components/DeleteConfirmModal";
 
 export default function PostAdmin() {
   const [posts, setPosts] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(null);
 
   const loadPosts = async () => {
     try {
       const res = await api.get("/posts");
-      // if paginated:
       const items = res.data.data || res.data;
       setPosts(items);
     } catch (err) {
@@ -32,16 +35,20 @@ export default function PostAdmin() {
     setShowForm(true);
   };
 
-  const handleDelete = async (post) => {
-    if (!window.confirm("Delete this post?")) return;
+  const handleDelete = async () => {
+    if (!deleteItem) return;
+
     try {
-      await api.delete(`/posts/${post.id}`);
+      await api.delete(`/posts/${deleteItem.id}`);
       loadPosts();
     } catch (err) {
-      console.error("Failed to delete", err);
-      alert("Error deleting");
+      alert("Failed to delete");
     }
+
+    setShowDelete(false);
+    setDeleteItem(null);
   };
+
 
   const imgUrl = (path) =>
     path ? `http://127.0.0.1:8000/storage/${path}` : "/images/no-image.png";
@@ -61,8 +68,8 @@ export default function PostAdmin() {
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-auto">
           <div className="w-full bg-white max-w-2xl p-6 mt-2 rounded-xl">
-            <div className="flex  justify-between items-center mb-4">
-              <h2 className="text-xl font-bold  text-green-700">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-green-700">
                 {editingPost ? "Edit Post" : "Create New Post"}
               </h2>
 
@@ -70,7 +77,7 @@ export default function PostAdmin() {
                 onClick={() => {
                   setShowForm(false);
                   setEditingPost(null);
-                }} 
+                }}
                 className="text-gray-500 hover:text-black text-2xl"
               >
                 ×
@@ -93,10 +100,9 @@ export default function PostAdmin() {
         </div>
       )}
 
-
       <div className="shadow rounded-lg overflow-x-auto">
         <table className="min-w-full text-sm">
-          <thead className="text-white bg-green-700 ">
+          <thead className="text-white bg-green-700">
             <tr>
               <th className="px-4 py-2 text-left">Image</th>
               <th className="px-4 py-2 text-left">Title</th>
@@ -105,50 +111,50 @@ export default function PostAdmin() {
               <th className="px-4 py-2 text-center">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {posts.map((p) => (
               <tr key={p.id} className="border-t">
                 <td className="px-4 py-2">
                   <img
-                    src={imgUrl(p.thumbnail)}
+                    src={
+                      p.images && p.images.length > 0
+                        ? imgUrl(p.images[0])
+                        : "/images/no-image.png"
+                    }
                     alt={p.title}
-                    className="h-12 w-16 object-cover rounded"
+                    className="h-12 w-16 object-cover rounded-full"
                   />
                 </td>
+
                 <td className="px-4 py-2">{p.title}</td>
+
                 <td className="px-4 py-2">
                   {p.published_at
                     ? new Date(p.published_at).toLocaleDateString()
                     : "-"}
                 </td>
+
+                {/* FIXED description */}
                 <td className="px-4 py-2">
-                  {p.created_at
-                    ? new Date(p.content).toLocaleDateString()
-                    : "-"}
+                  {p.description ? p.description.substring(0, 60) + "..." : "-"}
                 </td>
-                <td className="px-4 py-2 text-right space-x-2">
-                  <button
-                    onClick={() => handleEdit(p)}
-                    className="px-3 py-1 rounded bg-blue-600 text-white text-xs"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(p)}
-                    className="px-3 py-1 rounded bg-red-600 text-white text-xs"
-                  >
-                    Delete
-                  </button>
+
+                <td className="px-4 py-2 text-center relative">
+                  <MenuButton
+                    onEdit={() => handleEdit(p)}
+                    onDelete={() => {
+                      setDeleteItem(p);
+                      setShowDelete(true);
+                    }}
+                  />
                 </td>
               </tr>
             ))}
 
             {posts.length === 0 && (
               <tr>
-                <td
-                  colSpan={5}
-                  className="px-4 py-6 text-center text-gray-500"
-                >
+                <td colSpan={5} className="px-4 py-6 text-center text-gray-500">
                   No posts yet.
                 </td>
               </tr>
@@ -156,6 +162,13 @@ export default function PostAdmin() {
           </tbody>
         </table>
       </div>
+
+      <DeleteConfirmModal
+        open={showDelete}
+        onClose={() => setShowDelete(false)}
+        onConfirm={handleDelete}
+      />
+
     </div>
   );
 }

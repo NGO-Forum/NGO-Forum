@@ -1,6 +1,24 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import { api } from "../API/api";
+import PostCard from "../components/PostCard";
 
 export default function SachasPage() {
+  const [posts, setPosts] = useState([]);
+  
+    useEffect(() => {
+      loadPosts();
+    }, []);
+  
+    const loadPosts = async () => {
+      try {
+        const res = await api.get("/posts?department=RITI");
+        setPosts(res.data.data || res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
   return (
     <div className="w-full bg-white text-gray-800">
 
@@ -32,6 +50,23 @@ export default function SachasPage() {
         </div>
       </div>
 
+      {/* ===================== RECENT NEWS SECTION ===================== */}
+      <section className="py-8 bg-white">
+        <div className="max-w-8xl mx-auto px-6 lg:px-12">
+
+          <h2 className="text-lg lg:text-3xl font-bold text-gray-800 lg:mb-10 mb-4">
+            Program Achievements
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            {posts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+
+          </div>
+        </div>
+      </section>
 
     </div>
   );

@@ -12,16 +12,19 @@ class PostController extends Controller
     // GET /api/posts?limit=4
     public function index(Request $request)
     {
-        $query = Post::orderBy('published_at', 'desc')
-            ->orderBy('created_at', 'desc');
+        $query = Post::orderBy('id', 'desc');
 
-        if ($limit = $request->get('limit')) {
-            $posts = $query->take((int)$limit)->get();
-        } else {
-            $posts = $query->paginate(10);
+        // Filter by department
+        if ($request->department) {
+            $query->where('department', $request->department);
         }
 
-        return response()->json($posts, 200);
+        // Limit results
+        if ($limit = $request->get('limit')) {
+            return $query->take((int) $limit)->get();
+        }
+
+        return $query->paginate(10);
     }
 
     // GET /api/posts/{id}
@@ -36,15 +39,22 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'department' => 'required|string|in:PALI,RITI,SACHAS,MACOR',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'content' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'description' => 'nullable|string',
             'published_at' => 'nullable|date',
+            'link' => 'nullable|url',
         ]);
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('posts', 'public');
-        }
+        $imagePaths = [];
 
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imagePaths[] = $image->store('posts', 'public');
+            }
+        }
+        // SAVE IMAGES
+        $validated['images'] = $imagePaths;
+        
         $post = Post::create($validated);
 
         return response()->json($post, 201);
@@ -56,17 +66,35 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'string|max:255',
             'department' => 'string|in:PALI,RITI,SACHAS,MACOR',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'content' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'description' => 'nullable|string',
             'published_at' => 'nullable|date',
+            'link' => 'nullable|url',
         ]);
 
-        if ($request->hasFile('image')) {
-            if ($post->image) {
-                Storage::disk('public')->delete($post->image);
+        $imagePaths = $post->images ?? [];
+
+        $existing = $post->images ?? [];
+
+        if ($request->hasFile('images')) {
+            // delete old images
+            foreach ($existing as $old) {
+                Storage::disk('public')->delete($old);
             }
-            $validated['image'] = $request->file('image')->store('posts', 'public');
+
+            // upload new images
+            $newPaths = [];
+            foreach ($request->file('images') as $img) {
+                $newPaths[] = $img->store('posts', 'public');
+            }
+
+            $validated['images'] = $newPaths;
+        } else {
+            // keep old images
+            $validated['images'] = $existing;
         }
+
+        $validated['link'] = $request->link ?? $post->link;
 
         $post->update($validated);
 
@@ -77,8 +105,12 @@ class PostController extends Controller
     // DELETE /api/posts/{id}
     public function destroy(Post $post)
     {
-        if ($post->thumbnail && Storage::disk('public')->exists($post->thumbnail)) {
-            Storage::disk('public')->delete($post->thumbnail);
+        if ($post->images && is_array($post->images)) {
+            foreach ($post->images as $img) {
+                if (Storage::disk('public')->exists($img)) {
+                    Storage::disk('public')->delete($img);
+                }
+            }
         }
 
         $post->delete();

@@ -1,137 +1,205 @@
 import { useState, useEffect } from "react";
 import { api } from "../../API/api";
+import StatusModal from "./StatusModal"; // Make sure this exists
 
 export default function PostForm({ editingPost, onSaved, onCancel }) {
-  const [title, setTitle] = useState(editingPost?.title || "");
-  const [content, setContent] = useState(editingPost?.content || "");
-  const [publishedAt, setPublishedAt] = useState(editingPost?.published_at || "");
-  const [department, setDepartment] = useState(editingPost?.department || "");
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(
-    editingPost?.image ? `http://127.0.0.1:8000/storage/${editingPost.image}` : null
-  );
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [publishedAt, setPublishedAt] = useState("");
+  const [department, setDepartment] = useState("");
+
+  const [oldImages, setOldImages] = useState([]);
+  const [newImages, setNewImages] = useState([]);
+  const [previews, setPreviews] = useState([]);
+
+  const [status, setStatus] = useState({
+    open: false,
+    type: "success",
+    message: "",
+  });
+
+  // Load form data when editing
+  useEffect(() => {
+    if (editingPost) {
+      setTitle(editingPost.title);
+      setDescription(editingPost.description);
+      setPublishedAt(editingPost.published_at || "");
+      setDepartment(editingPost.department);
+
+      setOldImages(editingPost.images || []);
+      setPreviews(
+        editingPost.images?.map(
+          (img) => `http://127.0.0.1:8000/storage/${img}`
+        ) || []
+      );
+    }
+  }, [editingPost]);
+
+  // Select new images
+  const handleImageSelect = (e) => {
+    const files = Array.from(e.target.files);
+    setNewImages(files);
+
+    setPreviews([
+      ...oldImages.map((img) => `http://127.0.0.1:8000/storage/${img}`),
+      ...files.map((file) => URL.createObjectURL(file)),
+    ]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const form = new FormData();
-      form.append("title", title);
-      form.append("content", content);
-      form.append("published_at", publishedAt);
-      form.append("department", department);
-      if (image) form.append("image", image);
+    const form = new FormData();
 
+    form.append("title", title);
+    form.append("description", description);
+    form.append("published_at", publishedAt);
+    form.append("department", department);
+
+    // Keep old images
+    oldImages.forEach((img, i) => {
+      form.append(`old_images[${i}]`, img);
+    });
+
+    // Add new images
+    newImages.forEach((file) => {
+      form.append("images[]", file);
+    });
+
+    try {
       if (editingPost) {
         await api.post(`/posts/${editingPost.id}?_method=PUT`, form);
+        setStatus({
+          open: true,
+          type: "success",
+          message: "Post updated successfully!",
+        });
       } else {
         await api.post("/posts", form);
+        setStatus({
+          open: true,
+          type: "success",
+          message: "Post created successfully!",
+        });
       }
 
-      alert("Post saved successfully!");
-      onSaved();
-    } catch (err) {
-      console.error(err);
-      alert("Error saving post");
+      // ❌ REMOVE onSaved() here
+    } catch (error) {
+      console.log("Error:", error.response?.data);
+      setStatus({
+        open: true,
+        type: "error",
+        message: "Failed to save post. Please check your input.",
+      });
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white shadow-lg rounded-xl p-8 border border-gray-200"
-    >
+    <>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-lg rounded-xl p-8 border border-gray-200"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        {/* Title */}
-        <div className="flex flex-col">
-          <label className="font-semibold mb-1">Title</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="border px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500"
-            required
-          />
-        </div>
-
-        {/* Department */}
-        <div className="flex flex-col">
-          <label className="font-semibold mb-1">Department</label>
-          <select
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-            className="border px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500"
-            required
-          >
-            <option value="">Select Department</option>
-            <option value="PALI">PALI</option>
-            <option value="RITI">RITI</option>
-            <option value="SACHAS">SACHAS</option>
-            <option value="MACOR">MACOR</option>
-          </select>
-        </div>
-
-        {/* Publish Date */}
-        <div className="flex flex-col">
-          <label className="font-semibold mb-1">Publish Date</label>
-          <input
-            type="datetime-local"
-            value={publishedAt}
-            onChange={(e) => setPublishedAt(e.target.value)}
-            className="border px-3 py-2 rounded-lg focus:ring-2 focus:ring-green-500"
-          />
-        </div>
-
-        {/* Image */}
-        <div className="flex flex-col">
-          <label className="font-semibold mb-1">Thumbnail Image</label>
-          <input
-            type="file"
-            onChange={(e) => {
-              setImage(e.target.files[0]);
-              setPreview(URL.createObjectURL(e.target.files[0]));
-            }}
-            className="border p-2 rounded-lg"
-          />
-
-          {preview && (
-            <img
-              src={preview}
-              alt="Preview"
-              className="mt-3 w-32 h-32 object-cover rounded-lg border"
+          {/* Title */}
+          <div className="flex flex-col">
+            <label className="font-semibold mb-1">Title</label>
+            <input
+              className="border px-3 py-2 rounded-lg"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
             />
-          )}
+          </div>
+
+          {/* Department */}
+          <div className="flex flex-col">
+            <label className="font-semibold mb-1">Department</label>
+            <select
+              className="border px-3 py-2 rounded-lg"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              required
+            >
+              <option value="">Select Department</option>
+              <option value="PALI">PALI</option>
+              <option value="RITI">RITI</option>
+              <option value="SACHAS">SACHAS</option>
+              <option value="MACOR">MACOR</option>
+            </select>
+          </div>
+
+          {/* Publish date */}
+          <div className="flex flex-col">
+            <label className="font-semibold mb-1">Publish Date</label>
+            <input
+              type="datetime-local"
+              className="border px-3 py-2 rounded-lg"
+              value={publishedAt}
+              onChange={(e) => setPublishedAt(e.target.value)}
+            />
+          </div>
+
+          {/* Images */}
+          <div className="flex flex-col">
+            <label className="font-semibold mb-1">Images</label>
+            <input
+              type="file"
+              multiple
+              className="border p-2 rounded-lg"
+              onChange={handleImageSelect}
+            />
+
+            {previews.length > 0 && (
+              <div className="grid grid-cols-3 gap-2 mt-3">
+                {previews.map((src, idx) => (
+                  <img
+                    key={idx}
+                    src={src}
+                    className="w-24 h-24 object-cover rounded border"
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
         </div>
-      </div>
 
-      {/* Content (full width) */}
-      <div className="mt-6">
-        <label className="font-semibold mb-1 block">Content</label>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="w-full border px-3 py-2 rounded-lg h-40 focus:ring-2 focus:ring-green-500"
-        />
-      </div>
+        {/* Description */}
+        <div className="mt-6">
+          <label className="font-semibold mb-1 block">Description</label>
+          <textarea
+            className="w-full border px-3 py-2 rounded-lg h-40"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
 
-      {/* Buttons */}
-      <div className="flex gap-3 mt-8">
-        <button
-          type="submit"
-          className="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg"
-        >
-          Save Post
-        </button>
+        <div className="flex gap-3 mt-8">
+          <button className="bg-green-700 text-white px-6 py-2 rounded-lg">
+            Save Post
+          </button>
+          <button
+            type="button"
+            onClick={onCancel}
+            className="bg-orange-400 text-white px-6 py-2 rounded-lg"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
 
-        <button
-          type="button"
-          onClick={onCancel}
-          className="bg-gray-300 hover:bg-gray-400 px-6 py-2 rounded-lg"
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+      {/* Success / Error Modal */}
+      <StatusModal
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+          onSaved();  // close form **AFTER** modal OK is clicked
+        }}
+      />
+    </>
   );
 }
