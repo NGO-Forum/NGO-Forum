@@ -27,12 +27,13 @@ import Volunteer from "./pages/Volunteer";
 import Careers from "./pages/Careers";
 
 // ADMIN PAGES
-import AdminLayout from "./admins/AdminLayout";
-import PeopleAdmin from "./admins/PeopleAdmin";
-import AdminDashboard from "./admins/AdminDashboard";
+import AdminLayout from "./admins/page/AdminLayout";
+import PeopleAdmin from "./admins/page/PeopleAdmin";
+import AdminDashboard from "./admins/page/AdminDashboard";
 import RequireAdmin from "./admins/middleware/RequireAdmin";
 import AdminLogin from "./admins/page/AdminLogin";
-import PostsAdmin from "./admins/PostAdmin";
+import PostsAdmin from "./admins/page/PostAdmin";
+import DocumentsAdmin from "./admins/page/DocumentsAdmin";
 
 
 
@@ -78,6 +79,7 @@ export default function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="people" element={<PeopleAdmin />} />
           <Route path="posts" element={<PostsAdmin />} /> {/* Placeholder for PostsAdmin */}
+          <Route path="documents" element={<DocumentsAdmin />} />
         </Route>
       </Routes>
 

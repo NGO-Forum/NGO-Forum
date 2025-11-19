@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { api } from "../API/api";
-import JobForm from "./components/JobForm";
+import { api } from "../../API/api";
+import JobForm from "../components/JobForm";
 
 export default function JobAdmin() {
   const [jobs, setJobs] = useState([]);

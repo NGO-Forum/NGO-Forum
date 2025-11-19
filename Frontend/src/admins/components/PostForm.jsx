@@ -68,7 +68,8 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
 
     try {
       if (editingPost) {
-        await api.post(`/posts/${editingPost.id}?_method=PUT`, form);
+        form.append("_method", "PUT");   // ⭐ REQUIRED ⭐
+        await api.put(`/posts/${editingPost.id}`, form);
         setStatus({
           open: true,
           type: "success",
@@ -157,7 +158,7 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
                   <img
                     key={idx}
                     src={src}
-                    className="w-24 h-24 object-cover rounded border"
+                    className="w-16 h-16 object-cover rounded border"
                   />
                 ))}
               </div>

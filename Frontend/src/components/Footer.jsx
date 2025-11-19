@@ -43,10 +43,10 @@ export default function Footer() {
         <hr className="border-white mb-10" />
 
         {/* Footer Columns */}
-        <div className="flex flex-row md:justify-between md:items-start gap-8 md:gap-6 flex-wrap md:flex-nowrap w-[100%]">
+        <div className="flex flex-row lg:justify-between lg:items-start gap-8 md:gap-2 lg:gap-6 flex-wrap md:flex-nowrap w-[100%]">
 
           {/* Column 1 */}
-          <div className="w-[60%] md:w-[13%]">
+          <div className="w-[57%] md:w-[25%] lg:w-[13%]">
             <h3 className="font-bold text-sm mb-3">Who We Are</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -94,10 +94,10 @@ export default function Footer() {
               </li>
             </ul>
 
-          </div>
+          </div> 
 
           {/* Column 2 */}
-          <div className="w-[30%] md:w-[13%]">
+          <div className="w-[30%] md:w-[14%] lg:w-[10%]">
             <h3 className="font-bold text-sm mb-3">What We Do</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -144,7 +144,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3 */}
-          <div className="w-[60%] md:w-[13%]">
+          <div className="w-[57%] md:w-[15%] lg:w-[10%]">
             <h3 className="font-bold text-sm mb-3">Resource Hub</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -181,7 +181,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4 */}
-          <div className="w-[30%] md:w-[10%]">
+          <div className="w-[30%] md:w-[15%] lg:w-[10%]">
             <h3 className="font-bold text-sm mb-3">Get Involved</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -218,7 +218,7 @@ export default function Footer() {
           </div>
 
           {/* FIND US Column */}
-          <div className="w-full md:w-[41%]">
+          <div className="w-full md:w-[28%] lg:w-[50%]">
             <h3 className="font-bold text-sm mb-3">FIND US</h3>
             <ul className="space-y-2 text-sm">
               <li className="leading-relaxed">
@@ -243,7 +243,7 @@ export default function Footer() {
               Keep yourself informed, connect with us
             </p>
 
-            <div className="flex justify-center md:justify-start space-x-6 text-xl">
+            <div className="flex justify-center md:justify-start lg:space-x-6 space-x-4  text-xl">
 
               {/* Facebook */}
               <a

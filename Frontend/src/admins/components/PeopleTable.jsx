@@ -45,12 +45,12 @@ export default function PeopleTable({ people, loadPeople, setEditing }) {
                 />
               </td>
 
-              <td className="px-8 py-2">{p.name}</td>
-              <td className="px-8 py-2">{p.email}</td>
-              <td className="px-8 py-2">{p.role}</td>
-              <td className="px-8 py-2">{p.position}</td>
+              <td className="px-8 py-1">{p.name}</td>
+              <td className="px-8 py-1">{p.email}</td>
+              <td className="px-8 py-1">{p.role}</td>
+              <td className="px-8 py-1">{p.position}</td>
 
-              <td className="px-3 py-2 text-center">
+              <td className="px-3 py-1 text-center">
                 <MenuButton
                   onEdit={() => setEditing(p)}
                   onDelete={() => {

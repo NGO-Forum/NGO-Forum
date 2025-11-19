@@ -26,6 +26,7 @@ class PeopleController extends Controller
             'role'        => 'nullable|string|max:255',
             'position'    => 'nullable|string|max:255',
             'email'       => 'nullable|email|max:255',
+            'phone'       => 'nullable|string|max:255',
             'img'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'description' => 'nullable|string',
             'education'   => 'nullable|array',
@@ -54,6 +55,7 @@ class PeopleController extends Controller
             'role'        => 'nullable|string|max:255',
             'position'    => 'nullable|string|max:255',
             'email'       => 'nullable|email|max:255',
+            'phone'       => 'nullable|string|max:255',
             'img'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'description' => 'nullable|string',
             'education'   => 'nullable|array',
@@ -127,5 +129,29 @@ class PeopleController extends Controller
             "executiveDirector" => $executiveDirector,
             "departments" => $departments,
         ], 200);
+    }
+
+    public function media()
+    {
+        $people = People::all();
+
+        // Executive Director
+        $executive = $people->filter(function ($p) {
+            return str_contains(strtolower($p->role), "executive director");
+        });
+
+        // Managers (exclude ED)
+        $managers = $people->filter(function ($p) {
+            $role = strtolower($p->role);
+            return str_contains($role, "riti") && !str_contains($role, "executive director");
+        });
+
+        // Sort managers alphabetically
+        $managers = $managers->sortBy('name')->values();
+
+        // Final ordered list:
+        $final = $executive->merge($managers)->values();
+
+        return response()->json($final);
     }
 }

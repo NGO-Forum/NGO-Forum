@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { api } from "../API/api";
-import PeopleForm from "./components/PeopleForm";
-import PeopleTable from "./components/PeopleTable";
+import { api } from "../../API/api";
+import PeopleForm from "../components/PeopleForm";
+import PeopleTable from "../components/PeopleTable";
 
 export default function PeopleAdmin() {
   const [category, setCategory] = useState("director");
@@ -61,7 +61,7 @@ export default function PeopleAdmin() {
       {/* Form Modal */}
       {openForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-[500px] shadow-lg">
+          <div className="bg-white p-6 rounded-lg w-3xl shadow-lg h-[95%] overflow-auto">
             <PeopleForm
               category={category}
               setCategory={setCategory}

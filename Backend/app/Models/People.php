@@ -10,7 +10,7 @@ class People extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','role','position','email','img','description','education','category'
+        'name','role','position','email','img','description','education','category', 'phone'
     ];
 
     protected $casts = [

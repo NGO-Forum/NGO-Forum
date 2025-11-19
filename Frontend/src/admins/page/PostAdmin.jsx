@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { api } from "../API/api";
-import PostForm from "./components/PostForm";
-import MenuButton from "./components/MenuButton";
-import DeleteConfirmModal from "./components/DeleteConfirmModal";
+import { api } from "../../API/api";
+import PostForm from "../components/PostForm";
+import MenuButton from "../components/MenuButton";
+import DeleteConfirmModal from "../components/DeleteConfirmModal";
 
 export default function PostAdmin() {
   const [posts, setPosts] = useState([]);

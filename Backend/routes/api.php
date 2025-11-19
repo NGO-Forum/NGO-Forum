@@ -8,6 +8,7 @@ use App\Http\Controllers\ExecutiveDirectorController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\DocumentController;
 
 // Public routes
 Route::get('/departments', [DepartmentController::class, 'index']);
@@ -35,6 +36,12 @@ Route::get('/posts/{post}', [PostController::class, 'show']);
 Route::get('/jobs', [JobController::class, 'index']);
 Route::get('/jobs/{id}', [JobController::class, 'show']);
 
+// Media contact
+Route::get('media', [PeopleController::class, 'media']);
+
+// Document file
+Route::get('/documents', [DocumentController::class, 'index']);
+Route::get('/documents/{id}', [DocumentController::class, 'show']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -54,7 +61,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Jobs management
     Route::post('/jobs', [JobController::class, 'store']);
-    Route::post('/jobs/{id}', [JobController::class, 'update']);
+    Route::put('/jobs/{id}', [JobController::class, 'update']);
     Route::delete('/jobs/{id}', [JobController::class, 'destroy']);
+
+    // Document file
+    Route::post('/documents', [DocumentController::class, 'store']);
+    Route::put('/documents/{id}', [DocumentController::class, 'update']);
+    Route::delete('/documents/{id}', [DocumentController::class, 'destroy']);
     
 });

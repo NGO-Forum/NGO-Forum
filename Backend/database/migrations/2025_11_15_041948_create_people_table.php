@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('position')->nullable();
             $table->string('email')->nullable();
             $table->string('img')->nullable();
+            $table->string('phone')->nullable();
             $table->text('description')->nullable();
             $table->json('education')->nullable();
             $table->string('category'); // director, advisor, management, etc.
