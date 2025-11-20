@@ -152,7 +152,7 @@ export default function Navbar() {
       image: "/images/GetInvolved/membership.png",
     },
     {
-      name: "Volunteer",
+      name: "Volunteer / Intern",
       path: "/volunteer",
       title: "Volunteer",
       text: "At the NGO Forum on Cambodia, we welcome everyone who is interested in working with us voluntarily.",
@@ -167,6 +167,22 @@ export default function Navbar() {
     },
   ];
 
+  const OurProjects = [
+    {
+      name: "PROJECTS",
+      path: "/project",
+      title: "OUR PROJECTS",
+      text: "Where you can find the latest updates about our work.",
+      image: "/images/ResourceHub/latest.png",
+    },
+    {
+      name: "OUR IMPACTS",
+      path: "/impacts",
+      title: "OUR IMPACTS",
+      text: "At this section, you can find our Press Release, Media Coverage, about our works and our members.",
+      image: "/images/ResourceHub/media.png",
+    },
+  ]
   return (
     <nav className="w-full p-4 bg-white shadow-md sticky top-0 z-50 flex justify-center">
       <div className="flex items-center justify-between w-[95%] max-w-[1400px] flex-wrap">
@@ -186,7 +202,7 @@ export default function Navbar() {
             <button className="hover:text-green-700">Who We Are</button>
             {openDropdown === "who" && (
               <div
-                className="absolute left-1/2 md:left-[14rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
+                className="absolute left-1/2 lg:left-[19.65rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
                 onMouseEnter={() => setOpenDropdown("who")}
                 onMouseLeave={handleMouseLeave}
               >
@@ -233,7 +249,7 @@ export default function Navbar() {
             <button className="hover:text-green-700">What We Do</button>
             {openDropdown === "what" && (
               <div
-                className="absolute left-1/2 md:left-[5.8rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
+                className="absolute left-1/2 lg:left-[11.4rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
                 onMouseEnter={() => setOpenDropdown("what")}
                 onMouseLeave={handleMouseLeave}
               >
@@ -280,7 +296,7 @@ export default function Navbar() {
             <button className="hover:text-green-700">Resource Hub</button>
             {openDropdown === "resource" && (
               <div
-                className="absolute left-1/2 md:-left-[2.5rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
+                className="absolute left-1/2 lg:-right-[1rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
                 onMouseEnter={() => setOpenDropdown("resource")}
                 onMouseLeave={handleMouseLeave}
               >
@@ -327,7 +343,7 @@ export default function Navbar() {
             <button className="hover:text-green-700">Get Involved</button>
             {openDropdown === "involved" && (
               <div
-                className="absolute left-1/2 md:-left-[11.3rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
+                className="absolute left-1/2 lg:-left-[5.65rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
                 onMouseEnter={() => setOpenDropdown("involved")}
                 onMouseLeave={handleMouseLeave}
               >
@@ -368,6 +384,53 @@ export default function Navbar() {
               </div>
             )}
           </li>
+
+          {/* Our Project */}
+          <li className="relative" onMouseEnter={() => setOpenDropdown("project")}>
+            <button className="hover:text-green-700">Our Project</button>
+            {openDropdown === "project" && (
+              <div
+                className="absolute left-1/2 lg:-left-[13.9rem] -translate-x-1/2 top-full mt-4 bg-green-700 text-white rounded-md shadow-xl w-[95vw] md:w-[900px] lg:w-[1000px] flex flex-col md:flex-row justify-between"
+                onMouseEnter={() => setOpenDropdown("project")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <ul className="w-full md:w-1/4 p-4 flex flex-col justify-center">
+                  {OurProjects.map((item) => (
+                    <li key={item.name}>
+                      <NavLink
+                        to={item.path}
+                        onMouseEnter={() => setActiveItem(item)}
+                        className={({ isActive }) =>
+                          "block px-3 py-2 rounded-md mb-3 text-sm sm:text-base " +
+                          (isActive ? "bg-yellow-500 text-white font-semibold" : "hover:bg-green-800")
+                        }
+                      >
+                        {item.name}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="w-full md:w-3/4 p-6 flex flex-col md:flex-row items-center justify-between">
+                  <div className="flex-1 pr-4">
+                    <h3 className="text-lg md:text-xl font-bold mb-3">
+                      {activeItem?.title || OurProjects[0].title}
+                    </h3>
+                    <p className="text-white/90 leading-relaxed text-sm sm:text-base">
+                      {activeItem?.text || OurProjects[0].text}
+                    </p>
+                  </div>
+                  <div className="w-full md:w-72 h-40 md:h-64 lg:h-72 mt-4 md:mt-0">
+                    <img
+                      src={activeItem?.image || OurProjects[0].image}
+                      alt="Get Involved"
+                      className="w-full h-full object-cover rounded-md shadow-md"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </li>
         </ul>
 
         {/* ✅ Donate Button responsive */}
@@ -386,7 +449,7 @@ export default function Navbar() {
         {/* Mobile Dropdown */}
         {mobileMenu && (
           <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-white shadow-lg rounded-xl py-4 px-6 border border-gray-100 
-    w-[90%] sm:w-[95%] md:w-[400px] lg:hidden transition-all duration-300">
+    w-[90%] sm:w-[95%] md:w-[95%] lg:hidden transition-all duration-300">
 
             {/* Collapsible sections */}
             <MobileDropdown
@@ -422,6 +485,15 @@ export default function Navbar() {
               isOpen={mobileSubmenu === "involved"}
               toggle={() =>
                 setMobileSubmenu(mobileSubmenu === "involved" ? null : "involved")
+              }
+              closeMenu={() => setMobileMenu(false)}
+            />
+            <MobileDropdown
+              title="Our Projects"
+              items={OurProjects}
+              isOpen={mobileSubmenu === "project"}
+              toggle={() =>
+                setMobileSubmenu(mobileSubmenu === "project" ? null : "project")
               }
               closeMenu={() => setMobileMenu(false)}
             />

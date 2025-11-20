@@ -70,7 +70,29 @@ export default function AdminLayout() {
             Documents Media
           </NavLink>
 
+          <NavLink
+            to="/admin/librarys"
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-lg transition ${isActive
+                ? "bg-green-600 text-white"
+                : "text-gray-700 hover:bg-gray-100 hover:text-green-700"
+              }`
+            }
+          >
+            Library File
+          </NavLink>
 
+          <NavLink
+            to="/admin/jobs"
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-lg transition ${isActive
+                ? "bg-green-600 text-white"
+                : "text-gray-700 hover:bg-gray-100 hover:text-green-700"
+              }`
+            }
+          >
+            Careers
+          </NavLink>
         </nav>
       </aside>
 

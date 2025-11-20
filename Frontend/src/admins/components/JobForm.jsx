@@ -14,110 +14,147 @@ export default function JobForm({ editingJob, onSaved, onCancel }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const form = new FormData();
-    form.append("title", title);
-    form.append("description", description);
-    form.append("requirements", requirements);
-    form.append("closing_date", closingDate);
-    if (image) form.append("image", image);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("closing_date", closingDate);
+    formData.append("department", department);
+    formData.append("description", description);
+    formData.append("requirements", requirements);
 
-    if (editingJob) {
-      await api.post(`/jobs/${editingJob.id}?_method=PUT`, form);
-    } else {
-      await api.post("/jobs", form);
+    if (image) {
+      formData.append("image", image);
     }
 
-    onSaved();
+    try {
+      if (editingJob) {
+        await api.post(`/jobs/${editingJob.id}?_method=PUT`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      } else {
+        await api.post(`/jobs`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
+
+      onSaved();
+
+    } catch (error) {
+      console.error("Submit failed:", error);
+      alert("Validation failed — check your required fields.");
+    }
   };
+
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-md mb-6"
+      className="bg-white p-8 rounded-2xl shadow-lg space-y-6"
     >
-      <h2 className="text-xl font-bold text-green-700 mb-4">
-        {editingJob ? "Edit Job Posting" : "Create Job Posting"}
-      </h2>
 
-      {/* Title */}
-      <div className="mb-4">
-        <label className="font-semibold">Job Title</label>
-        <input
-          className="w-full border p-2 rounded mt-1"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+      {/* HEADER */}
+      <div className="flex items-center justify-between border-b pb-4">
+        <h2 className="text-2xl font-bold text-green-700">
+          {editingJob ? "Edit Job Posting" : "Create New Job"}
+        </h2>
+
+        {editingJob && (
+          <span className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-lg">
+            Editing ID: {editingJob.id}
+          </span>
+        )}
       </div>
 
-      {/* Closing Date */}
-      <div className="mb-4">
-        <label className="font-semibold">Closing Date</label>
-        <input
-          type="date"
-          className="w-full border p-2 rounded mt-1"
-          value={closingDate}
-          onChange={(e) => setClosingDate(e.target.value)}
-        />
-      </div>
+      {/* INPUT GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <div>
-        <label className="font-semibold">Department</label>
-        <input
-          className="w-full border p-2 rounded mt-1"
+        {/* Job Title */}
+        <div>
+          <label className="font-semibold text-gray-700">Job Title</label>
+          <input
+            className="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="e.g. Senior Finance Officer"
+            required
+          />
+        </div>
+
+        {/* Closing Date */}
+        <div>
+          <label className="font-semibold text-gray-700">Closing Date</label>
+          <input
+            type="date"
+            className="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            value={closingDate}
+            onChange={(e) => setClosingDate(e.target.value)}
+          />
+        </div>
+
+        {/* Department */}
+        <div className="md:col-span-2">
+          <label className="font-semibold text-gray-700">Department</label>
+          <input
+            className="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-green-500 focus:outline-none"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-        />
-      </div>
+            placeholder="e.g. Finance, Admin, HR, Program"
+          />
+        </div>
 
-      {/* Thumbnail */}
-      <div className="mb-4">
-        <label className="font-semibold">Image</label>
-        <input
-          type="file"
-          onChange={(e) => setImage(e.target.files[0])}
-          className="mt-2"
-        />
+        {/* Thumbnail */}
+        <div className="md:col-span-2">
+          <label className="font-semibold text-gray-700">Job Image / Banner</label>
+          <input
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            className="mt-2 border rounded-lg px-3 py-2 w-full bg-gray-50"
+          />
+        </div>
       </div>
 
       {/* Description */}
-      <div className="mb-4">
-        <label className="font-semibold">Job Description</label>
+      <div>
+        <label className="font-semibold text-gray-700">Job Description</label>
         <textarea
-          className="w-full border p-2 rounded mt-1 h-32"
+          className="w-full border rounded-lg px-3 py-2 mt-1 h-40 
+                 focus:ring-2 focus:ring-green-500 focus:outline-none"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          placeholder="Describe the role, duties, working environment, expectations…"
           required
         />
       </div>
 
       {/* Requirements */}
-      <div className="mb-4">
-        <label className="font-semibold">Requirements</label>
+      <div>
+        <label className="font-semibold text-gray-700">Requirements</label>
         <textarea
-          className="w-full border p-2 rounded mt-1 h-32"
+          className="w-full border rounded-lg px-3 py-2 mt-1 h-40 
+                 focus:ring-2 focus:ring-green-500 focus:outline-none"
           value={requirements}
           onChange={(e) => setRequirements(e.target.value)}
+          placeholder="List required qualifications, experience, and skills…"
         />
       </div>
 
-      {/* ACTION BUTTONS */}
-      <div className="flex gap-3 mt-4">
-        <button
-          type="submit"
-          className="bg-green-700 text-white px-4 py-2 rounded-lg"
-        >
-          Save
-        </button>
-
+      {/* BUTTONS */}
+      <div className="flex justify-end gap-3 pt-4 border-t">
         <button
           type="button"
           onClick={onCancel}
-          className="bg-gray-300 px-4 py-2 rounded-lg"
+          className="px-5 py-2 rounded-lg border bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
         >
           Cancel
         </button>
+
+        <button
+          type="submit"
+          className="px-6 py-2 rounded-lg bg-green-700 text-white font-semibold hover:bg-green-800 transition"
+        >
+          Save Job
+        </button>
       </div>
     </form>
+
   );
 }

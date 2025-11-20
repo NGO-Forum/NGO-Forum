@@ -3,7 +3,7 @@ import { Facebook, Instagram, Youtube, Linkedin, X } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-green-700 text-white p-8 md:p-12">
+    <footer className="bg-green-700 text-white p-8 md:p-4 lg:p-12">
       <div className="max-w-full mx-auto">
 
         {/* Top Bar */}
@@ -217,8 +217,35 @@ export default function Footer() {
 
           </div>
 
+          {/* Column 5 */}
+          <div className="w-[30%] md:w-[15%] lg:w-[10%]">
+            <h3 className="font-bold text-sm mb-3">Our Projects</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <NavLink to="/project"
+                  className={({ isActive }) =>
+                    isActive ? "underline font-semibold text-yellow-300" : "hover:underline"
+                  }
+                >
+                  Membership
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/impacts"
+                  className={({ isActive }) =>
+                    isActive ? "underline font-semibold text-yellow-300" : "hover:underline"
+                  }
+                >
+                  Volunteer
+                </NavLink>
+              </li>
+            </ul>
+
+          </div>
+
           {/* FIND US Column */}
-          <div className="w-full md:w-[28%] lg:w-[50%]">
+          <div className="w-full md:w-[26%] lg:w-[45%]">
             <h3 className="font-bold text-sm mb-3">FIND US</h3>
             <ul className="space-y-2 text-sm">
               <li className="leading-relaxed">

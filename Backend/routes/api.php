@@ -9,6 +9,11 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\JobApplicationController;
+
+// Aplly Job
+Route::post('/apply-job', [JobApplicationController::class, 'send']);
 
 // Public routes
 Route::get('/departments', [DepartmentController::class, 'index']);
@@ -43,6 +48,10 @@ Route::get('media', [PeopleController::class, 'media']);
 Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/documents/{id}', [DocumentController::class, 'show']);
 
+// Document file
+Route::get('/librarys', [LibraryController::class, 'index']);
+Route::get('/librarys/{id}', [LibraryController::class, 'show']);
+
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     // Admin authentication
@@ -68,5 +77,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/documents', [DocumentController::class, 'store']);
     Route::put('/documents/{id}', [DocumentController::class, 'update']);
     Route::delete('/documents/{id}', [DocumentController::class, 'destroy']);
+
+    // Document file
+    Route::post('/librarys', [LibraryController::class, 'store']);
+    Route::put('/librarys/{id}', [LibraryController::class, 'update']);
+    Route::delete('/librarys/{id}', [LibraryController::class, 'destroy']);
     
 });

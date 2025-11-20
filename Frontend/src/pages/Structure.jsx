@@ -206,6 +206,8 @@ export default function OrganizationalStructure() {
     return `http://127.0.0.1:8000/storage/${path}`;
   };
 
+  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="w-full min-h-screen bg-white">
@@ -245,7 +247,12 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortDirectors(data.directors).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center">
+              <div key={i} className="flex flex-col items-center justify-center"
+                onClick={() => {
+                  setSelectedPerson(d);
+                  setShowModal(true);
+                }}
+              >
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
                   <img
@@ -278,7 +285,12 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortAdvisors(data.advisors).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center">
+              <div key={i} className="flex flex-col items-center justify-center"
+                onClick={() => {
+                  setSelectedPerson(d);
+                  setShowModal(true);
+                }}
+              >
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
                   <img
@@ -309,7 +321,12 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortManagersFirst(getManagementTeam()).map((d, i) => (
-              <div key={i} className="flex flex-col items-center">
+              <div key={i} className="flex flex-col items-center"
+                onClick={() => {
+                  setSelectedPerson(d);
+                  setShowModal(true);
+                }}
+              >
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] overflow-hidden">
                   <img
@@ -335,7 +352,7 @@ export default function OrganizationalStructure() {
         {/* ---------- CONTENT ---------- */}
         <div className="max-w-full mx-auto px-6 lg:px-12 py-8 md:py-10">
           {/* Board Title */}
-          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+          <h2 className="text-2xl lg:text-4xl font-bold text-green-700">
             PALI Program
           </h2>
           <p className="mb-4 md:mb-12 mt-2 text-lg">Policies and Legal Influences</p>
@@ -344,7 +361,12 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortByRolePriority(data.pili).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center">
+              <div key={i} className="flex flex-col items-center justify-center"
+                onClick={() => {
+                  setSelectedPerson(d);
+                  setShowModal(true);
+                }}
+              >
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
                   <img
@@ -370,7 +392,7 @@ export default function OrganizationalStructure() {
         {/* ---------- CONTENT ---------- */}
         <div className="max-w-full mx-auto px-6 lg:px-12 py-8 md:py-10">
           {/* Board Title */}
-          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+          <h2 className="text-2xl lg:text-4xl font-bold text-green-700">
             SACHAS Program
           </h2>
           <p className="mb-4 md:mb-12 mt-2 text-lg">Solidarity Actions for Community Harmonization and Sustainability</p>
@@ -379,7 +401,12 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortByRolePriority(data.sachas).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center">
+              <div key={i} className="flex flex-col items-center justify-center"
+                onClick={() => {
+                  setSelectedPerson(d);
+                  setShowModal(true);
+                }}
+              >
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
                   <img
@@ -405,7 +432,7 @@ export default function OrganizationalStructure() {
         {/* ---------- CONTENT ---------- */}
         <div className="max-w-full mx-auto px-6 lg:px-12 py-8 md:py-10">
           {/* Board Title */}
-          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+          <h2 className="text-2xl lg:text-4xl font-bold text-green-700">
             RITI Program
           </h2>
           <p className="mb-4 md:mb-12 mt-2 text-lg">Resilient, Innovative, and Transformative Institution</p>
@@ -414,7 +441,12 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortByRolePriority(data.riti).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center">
+              <div key={i} className="flex flex-col items-center justify-center"
+                onClick={() => {
+                  setSelectedPerson(d);
+                  setShowModal(true);
+                }}
+              >
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
                   <img
@@ -440,7 +472,7 @@ export default function OrganizationalStructure() {
         {/* ---------- CONTENT ---------- */}
         <div className="max-w-full mx-auto px-6 lg:px-12 py-8 md:py-10">
           {/* Board Title */}
-          <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+          <h2 className="text-2xl lg:text-4xl font-bold text-green-700">
             MACOR Program
           </h2>
           <p className="mb-4 md:mb-12 mt-2 text-lg">Management of Accounting, Competencies, Operations and Resources</p>
@@ -449,7 +481,13 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortByRolePriority(data.macor).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center">
+
+              <div key={i} className="flex flex-col items-center justify-center"
+                onClick={() => {
+                  setSelectedPerson(d);
+                  setShowModal(true);
+                }}
+              >
 
                 <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
                   <img
@@ -471,8 +509,68 @@ export default function OrganizationalStructure() {
         </div>
       </section>
 
+      {showModal && selectedPerson && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full p-6 relative h-[98%] md:h-auto lg:h-auto overflow-auto">
+
+            {/* Close Button */}
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-4 text-2xl font-bold text-gray-500 hover:text-gray-800"
+            >
+              ✕
+            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+              {/* LEFT: Image */}
+              <div className="flex justify-center mt-2 lg:mt-6">
+                <img
+                  src={imgUrl(selectedPerson.img)}
+                  alt={selectedPerson.name}
+                  className="w-72 h-72 md:w-full md:h-full lg:w-80 lg:h-80 object-cover rounded-3xl shadow-md"
+                />
+              </div>
+
+              {/* RIGHT: Details */}
+              <div>
+                <h2 className="text-2xl lg:text-3xl font-bold text-green-700">
+                  {selectedPerson.name}
+                </h2>
+                <p className="text-gray-600 text-lg lg:text-xl mt-1">
+                  {selectedPerson.role}
+                </p>
+
+                <button
+                  className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition"
+                >
+                  Add to Contact
+                </button>
+
+                <hr className="my-5 border-dashed" />
+
+                <p className="text-gray-700 leading-relaxed">
+                  {selectedPerson.description || "No bio available."}
+                </p>
+
+                <h3 className="text-xl text-green-700 font-bold mt-6">
+                  Education Background
+                </h3>
+                <ul className="text-gray-700 list-disc ml-6 mt-2">
+                  {(selectedPerson.education || []).map((edu, idx) => (
+                    <li key={idx}>{edu}</li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+
       <div className="bg-white w-full px-6 py-8 lg:py-12 lg:px-12 hidden md:block">
-        <h1 className="text-4xl font-bold text-green-700 text-left mb-12">
+        <h1 className="text-2xl lg:text-4xl font-bold text-green-700 text-left mb-12">
           Organization Chart
         </h1>
 

@@ -26,6 +26,10 @@ import Membership from "./pages/Membership";
 import Volunteer from "./pages/Volunteer";
 import Careers from "./pages/Careers";
 
+// Our Projects
+import Project from "./pages/Project";
+import Impacts from "./pages/Impacts";
+
 // ADMIN PAGES
 import AdminLayout from "./admins/page/AdminLayout";
 import PeopleAdmin from "./admins/page/PeopleAdmin";
@@ -34,8 +38,8 @@ import RequireAdmin from "./admins/middleware/RequireAdmin";
 import AdminLogin from "./admins/page/AdminLogin";
 import PostsAdmin from "./admins/page/PostAdmin";
 import DocumentsAdmin from "./admins/page/DocumentsAdmin";
-
-
+import LibraryAdmin from "./admins/page/LibraryAdmin";
+import JobAdmin from "./admins/page/JobAdmin";
 
 export default function App() {
   const location = useLocation();
@@ -64,6 +68,8 @@ export default function App() {
         <Route path="/membership" element={<Membership />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/projects" element={<Project />} />
+        <Route path="/impacts" element={<Impacts />} />
 
         {/* ADMIN ROUTES (NO NAVBAR/FOOTER) */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -80,6 +86,8 @@ export default function App() {
           <Route path="people" element={<PeopleAdmin />} />
           <Route path="posts" element={<PostsAdmin />} /> {/* Placeholder for PostsAdmin */}
           <Route path="documents" element={<DocumentsAdmin />} />
+          <Route path="librarys" element={<LibraryAdmin />} />
+          <Route path="jobs" element={<JobAdmin />} />
         </Route>
       </Routes>
 
