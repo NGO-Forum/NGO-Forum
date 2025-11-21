@@ -8,6 +8,7 @@ export default function DonorSlider() {
     { src: "/images/dornor/actionaid.png", url: "https://cambodia.actionaid.org/" },
     { src: "/images/dornor/EFD_ISB_d_CMYK_pos_quer_MELANI-EDA-DE-500dpi.png", url: "https://www.eda.admin.ch/" },
     { src: "/images/dornor/heks.jpg", url: "https://en.heks.ch/" },
+    { src: "/images/dornor/Porticus-logo.png", url: "https://www.porticus.com/" },
     { src: "/images/dornor/mekong_region_land_governance_logo.jpg", url: "https://www.mrlg.org" },
     { src: "/images/dornor/ilc_converted.jpg", url: "https://www.landcoalition.org" },
     { src: "/images/dornor/oxfam.png", url: "https://cambodia.oxfam.org/" },

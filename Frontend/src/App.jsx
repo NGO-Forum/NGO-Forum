@@ -40,6 +40,8 @@ import PostsAdmin from "./admins/page/PostAdmin";
 import DocumentsAdmin from "./admins/page/DocumentsAdmin";
 import LibraryAdmin from "./admins/page/LibraryAdmin";
 import JobAdmin from "./admins/page/JobAdmin";
+import VolunteerAdmin from "./admins/page/VolunteerAdmin";
+import ProjectAdmin from "./admins/page/ProjectAdmin";
 
 export default function App() {
   const location = useLocation();
@@ -68,7 +70,7 @@ export default function App() {
         <Route path="/membership" element={<Membership />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/careers" element={<Careers />} />
-        <Route path="/projects" element={<Project />} />
+        <Route path="/project" element={<Project />} />
         <Route path="/impacts" element={<Impacts />} />
 
         {/* ADMIN ROUTES (NO NAVBAR/FOOTER) */}
@@ -88,6 +90,8 @@ export default function App() {
           <Route path="documents" element={<DocumentsAdmin />} />
           <Route path="librarys" element={<LibraryAdmin />} />
           <Route path="jobs" element={<JobAdmin />} />
+          <Route path="volunteers" element={<VolunteerAdmin />} />
+          <Route path="project" element={<ProjectAdmin />} />
         </Route>
       </Routes>
 

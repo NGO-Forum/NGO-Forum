@@ -227,7 +227,7 @@ export default function Footer() {
                     isActive ? "underline font-semibold text-yellow-300" : "hover:underline"
                   }
                 >
-                  Membership
+                  Projects
                 </NavLink>
               </li>
 
@@ -237,7 +237,7 @@ export default function Footer() {
                     isActive ? "underline font-semibold text-yellow-300" : "hover:underline"
                   }
                 >
-                  Volunteer
+                  Impacts
                 </NavLink>
               </li>
             </ul>

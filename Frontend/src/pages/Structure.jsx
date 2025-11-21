@@ -247,7 +247,7 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortDirectors(data.directors).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center"
+              <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
                 onClick={() => {
                   setSelectedPerson(d);
                   setShowModal(true);
@@ -285,7 +285,7 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortAdvisors(data.advisors).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center"
+              <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
                 onClick={() => {
                   setSelectedPerson(d);
                   setShowModal(true);
@@ -321,7 +321,7 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortManagersFirst(getManagementTeam()).map((d, i) => (
-              <div key={i} className="flex flex-col items-center"
+              <div key={i} className="cursor-pointer flex flex-col items-center"
                 onClick={() => {
                   setSelectedPerson(d);
                   setShowModal(true);
@@ -361,7 +361,7 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortByRolePriority(data.pili).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center"
+              <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
                 onClick={() => {
                   setSelectedPerson(d);
                   setShowModal(true);
@@ -401,7 +401,7 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortByRolePriority(data.sachas).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center"
+              <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
                 onClick={() => {
                   setSelectedPerson(d);
                   setShowModal(true);
@@ -441,7 +441,7 @@ export default function OrganizationalStructure() {
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
 
             {sortByRolePriority(data.riti).map((d, i) => (
-              <div key={i} className="flex flex-col items-center justify-center"
+              <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
                 onClick={() => {
                   setSelectedPerson(d);
                   setShowModal(true);
@@ -482,7 +482,7 @@ export default function OrganizationalStructure() {
 
             {sortByRolePriority(data.macor).map((d, i) => (
 
-              <div key={i} className="flex flex-col items-center justify-center"
+              <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
                 onClick={() => {
                   setSelectedPerson(d);
                   setShowModal(true);

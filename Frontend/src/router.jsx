@@ -1,25 +1,44 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home";
+
+// WHO WE ARE
 import About from "./pages/About";
 import History from "./pages/History";
 import Structure from "./pages/Structure";
 import Contact from "./pages/Contact";
+
+// WHAT WE DO
 import Pali from "./pages/Pali";
 import Sachas from "./pages/Sachas";
 import Riti from "./pages/Riti";
 import Macor from "./pages/Macor";
+
+// RESOURCE HUB
+import Latest from "./pages/Latest";
 import Media from "./pages/Media";
 import Library from "./pages/Library";
+
+// GET INVOLVED
 import Membership from "./pages/Membership";
 import Volunteer from "./pages/Volunteer";
 import Careers from "./pages/Careers";
-import Lates from "./pages/Lates";
 
-// Admin Pages
-import AdminLayout from "./admins/AdminLayout";
-import PeopleAdmin from "./admins/PeopleAdmin";
-import AdminDashboard from "./admins/AdminDashboard";
-import PostsAdmin from "./admins/PostAdmin";
+// Our Projects
+import Project from "./pages/Project";
+import Impacts from "./pages/Impacts";
+
+
+// ADMIN PAGES
+import AdminLayout from "./admins/page/AdminLayout";
+import PeopleAdmin from "./admins/page/PeopleAdmin";
+import AdminDashboard from "./admins/page/AdminDashboard";
+import RequireAdmin from "./admins/middleware/RequireAdmin";
+import AdminLogin from "./admins/page/AdminLogin";
+import PostsAdmin from "./admins/page/PostAdmin";
+import DocumentsAdmin from "./admins/page/DocumentsAdmin";
+import LibraryAdmin from "./admins/page/LibraryAdmin";
+import JobAdmin from "./admins/page/JobAdmin";
+import VolunteerAdmin from "./admins/page/VolunteerAdmin";
+import ProjectAdmin from "./admins/page/ProjectAdmin";
 
 
 const router = createBrowserRouter([
@@ -32,22 +51,34 @@ const router = createBrowserRouter([
   { path: "/sachas", element: <Sachas /> },
   { path: "/riti", element: <Riti /> },
   { path: "/macor", element: <Macor /> },
-  { path: "/latest", element: <Lates /> },
+  { path: "/latest", element: <Latest /> },
   { path: "/media", element: <Media /> },
   { path: "/library", element: <Library /> },
-  { path: "/membership", element: <Membership /> },
   { path: "/volunteer", element: <Volunteer /> },
+  { path: "/membership", element: <Membership /> },
   { path: "/careers", element: <Careers /> },
-  
+  { path: "/project", element: <Project /> },
+  { path: "/impacts", element: <Impacts /> },
+
+
   // ADMIN ROUTES
-  
+  { path: "/admin/login", element: <AdminLogin /> },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <RequireAdmin>
+        <AdminLayout />
+      </RequireAdmin>
+    ),
     children: [
-      { index: true, element: <AdminDashboard /> },      // default /admin
+      { index: true, element: <AdminDashboard /> },
       { path: "people", element: <PeopleAdmin /> },
-      { path: "posts", element: <PostsAdmin /> }, // Placeholder for PostsAdmin
+      { path: "posts", element: <PostsAdmin /> },
+      { path: "documents", element: <DocumentsAdmin /> },
+      { path: "library", element: <LibraryAdmin /> },
+      { path: "jobs", element: <JobAdmin /> },
+      { path: "volunteer", element: <VolunteerAdmin /> },
+      { path: "project", element: <ProjectAdmin /> },
     ],
   },
 ]);

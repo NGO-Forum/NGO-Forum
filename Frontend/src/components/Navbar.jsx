@@ -172,8 +172,8 @@ export default function Navbar() {
       name: "PROJECTS",
       path: "/project",
       title: "OUR PROJECTS",
-      text: "Where you can find the latest updates about our work.",
-      image: "/images/ResourceHub/latest.png",
+      text: "Organized across the METRI pillars—PALI, SACHAS, RITI, and MACOR—each project tackles a specific programmatic challenge, from climate governance and land management to financial transparency, civic space, and institutional resilience. Supported by diverse development partners and CSO networks, these efforts ensure that NGOF’s collective mission is translated into concrete actions and measurable results.",
+      image: "/images/project/IMG_8390.JPG",
     },
     {
       name: "OUR IMPACTS",

@@ -11,6 +11,17 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\ProjectController;
+
+// Volunteer
+Route::get('/volunteers', [VolunteerController::class, 'index']);
+Route::get('/volunteers/{id}', [VolunteerController::class, 'show']);
+
+// Projrct
+Route::get('/projects', [ProjectController::class, 'index']);          // List all
+Route::get('/projects/{project}', [ProjectController::class, 'show']); // Get one
+
 
 // Aplly Job
 Route::post('/apply-job', [JobApplicationController::class, 'send']);
@@ -82,5 +93,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/librarys', [LibraryController::class, 'store']);
     Route::put('/librarys/{id}', [LibraryController::class, 'update']);
     Route::delete('/librarys/{id}', [LibraryController::class, 'destroy']);
-    
+
+    // Volunteer 
+    Route::post('/volunteers', [VolunteerController::class, 'store']);
+    Route::put('/volunteers/{id}', [VolunteerController::class, 'update']);
+    Route::delete('/volunteers/{id}', [VolunteerController::class, 'destroy']);
+
+    // Project Plan
+    Route::post('/projects', [ProjectController::class, 'store']);         // Create
+    Route::put('/projects/{project}', [ProjectController::class, 'update']); // Update
+    Route::delete('/projects/{project}', [ProjectController::class, 'destroy']); // Delete
+
 });
