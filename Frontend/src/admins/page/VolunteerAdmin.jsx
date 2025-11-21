@@ -18,6 +18,15 @@ export default function VolunteerAdmin() {
     message: "",
   });
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentVolunteers = volunteers.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(volunteers.length / itemsPerPage);
+
   const loadVolunteers = async () => {
     const res = await api.get("/volunteers");
     setVolunteers(res.data);
@@ -40,7 +49,6 @@ export default function VolunteerAdmin() {
         type: "success",
         message: "Volunteer removed successfully!",
       });
-
     } catch (err) {
       setStatus({
         open: true,
@@ -52,7 +60,6 @@ export default function VolunteerAdmin() {
     setShowDelete(false);
     setDeleteItem(null);
   };
-
 
   return (
     <>
@@ -119,7 +126,7 @@ export default function VolunteerAdmin() {
             </thead>
 
             <tbody>
-              {volunteers.map((v) => (
+              {currentVolunteers.map((v) => (
                 <tr
                   key={v.id}
                   className="border-b hover:bg-gray-50 transition cursor-pointer"
@@ -135,10 +142,10 @@ export default function VolunteerAdmin() {
                     )}
                   </td>
 
-                  <td className="px-4 py-3 font-medium">{v.name}</td>
-                  <td className="px-4 py-3">{v.position}</td>
-                  <td className="px-4 py-3">{v.phone}</td>
-                  <td className="px-4 py-3">{v.department}</td>
+                  <td className="px-4 py-3 font-medium whitespace-nowrap">{v.name}</td>
+                  <td className="px-4 py-3 whitespace-nowrap">{v.position}</td>
+                  <td className="px-4 py-3 whitespace-nowrap">{v.phone}</td>
+                  <td className="px-4 py-3 whitespace-nowrap">{v.department}</td>
 
                   <td className="px-4 py-2 text-center relative">
                     <MenuButton
@@ -164,6 +171,47 @@ export default function VolunteerAdmin() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* PAGINATION */}
+        <div className="flex justify-center items-center mt-4 gap-2">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className={`px-3 py-1 rounded border ${currentPage === 1
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:bg-gray-100"
+              }`}
+          >
+            Prev
+          </button>
+          <span className="font-medium text-gray-700">
+            Page {currentPage} of {totalPages}
+          </span>
+
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-3 py-1 rounded border ${currentPage === i + 1
+                  ? "bg-green-600 text-white"
+                  : "hover:bg-gray-100"
+                }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className={`px-3 py-1 rounded border ${currentPage === totalPages
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:bg-gray-100"
+              }`}
+          >
+            Next
+          </button>
         </div>
       </div>
 

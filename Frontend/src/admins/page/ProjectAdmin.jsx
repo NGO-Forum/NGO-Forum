@@ -18,6 +18,14 @@ export default function ProjectAdmin() {
   const [showDelete, setShowDelete] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProjects = projects.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(projects.length / itemsPerPage);
+
 
   // Confirm delete (notify parent)
   const confirmDelete = async () => {
@@ -121,10 +129,41 @@ export default function ProjectAdmin() {
 
       {/* Table */}
       <ProjectTable
-        projects={projects}
+        projects={currentProjects}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
+
+      {/* Pagination */}
+      <div className="flex justify-center items-center gap-3 mt-2">
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          disabled={currentPage === 1}
+          className={`px-4 py-1 rounded-lg border ${
+            currentPage === 1
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+              : "bg-white hover:bg-gray-100"
+          }`}
+        >
+          Prev
+        </button>
+
+        <span className="font-medium text-gray-700">
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button
+          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+          disabled={currentPage === totalPages}
+          className={`px-4 py-1 rounded-lg border ${
+            currentPage === totalPages
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+              : "bg-white hover:bg-gray-100"
+          }`}
+        >
+          Next
+        </button>
+      </div>
 
       {/* Modal Form */}
       {showForm && (

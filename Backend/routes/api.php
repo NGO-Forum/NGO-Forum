@@ -13,6 +13,11 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\MemberController;
+
+
+// Membership logo
+Route::get('/members', [MemberController::class, 'index']);
 
 // Volunteer
 Route::get('/volunteers', [VolunteerController::class, 'index']);
@@ -104,4 +109,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/projects/{project}', [ProjectController::class, 'update']); // Update
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy']); // Delete
 
+    // Membership Logo
+    Route::post('/members', [MemberController::class, 'store']);
+    Route::put('/members/{member}', [MemberController::class, 'update']); // for _method=PUT
+    Route::delete('/members/{member}', [MemberController::class, 'destroy']);
 });

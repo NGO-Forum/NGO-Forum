@@ -39,6 +39,7 @@ import LibraryAdmin from "./admins/page/LibraryAdmin";
 import JobAdmin from "./admins/page/JobAdmin";
 import VolunteerAdmin from "./admins/page/VolunteerAdmin";
 import ProjectAdmin from "./admins/page/ProjectAdmin";
+import MemberAdmin from "./admins/page/MemberAdmin";
 
 
 const router = createBrowserRouter([
@@ -79,6 +80,7 @@ const router = createBrowserRouter([
       { path: "jobs", element: <JobAdmin /> },
       { path: "volunteer", element: <VolunteerAdmin /> },
       { path: "project", element: <ProjectAdmin /> },
+      { path: "member", element: <MemberAdmin /> },
     ],
   },
 ]);

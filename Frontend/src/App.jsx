@@ -42,6 +42,7 @@ import LibraryAdmin from "./admins/page/LibraryAdmin";
 import JobAdmin from "./admins/page/JobAdmin";
 import VolunteerAdmin from "./admins/page/VolunteerAdmin";
 import ProjectAdmin from "./admins/page/ProjectAdmin";
+import MemberAdmin from "./admins/page/MemberAdmin";
 
 export default function App() {
   const location = useLocation();
@@ -92,6 +93,7 @@ export default function App() {
           <Route path="jobs" element={<JobAdmin />} />
           <Route path="volunteers" element={<VolunteerAdmin />} />
           <Route path="project" element={<ProjectAdmin />} />
+          <Route path="member" element={<MemberAdmin />} />
         </Route>
       </Routes>
 

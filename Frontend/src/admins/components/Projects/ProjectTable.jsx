@@ -29,7 +29,7 @@ export default function ProjectTable({ projects, onEdit, onDelete }) {
           {projects.map((p) => (
             <tr key={p.id} className="border-t hover:bg-green-50 transition">
 
-              <td className="px-4 py-1">
+              <td className="px-4 py-1 whitespace-nowrap">
                 {p.image_urls?.length > 0 ? (
                   <img
                     src={p.image_urls[0]}
@@ -40,18 +40,25 @@ export default function ProjectTable({ projects, onEdit, onDelete }) {
                 )}
               </td>
 
+              <td className="px-4 py-1 font-medium text-gray-700 whitespace-nowrap max-w-[300px] truncate">
+                {p.name}
+              </td>
 
-              <td className="px-4 py-1 font-medium text-gray-700">{p.name}</td>
-              <td className="px-4 py-1">{p.donor || "—"}</td>
-              <td className="px-4 py-1">{p.department || "—"}</td>
+              <td className="px-4 py-1 whitespace-nowrap max-w-[200px] truncate">
+                {p.donor || "—"}
+              </td>
 
-              <td className="px-4 py-1 text-gray-600">
+              <td className="px-4 py-1 whitespace-nowrap">
+                {p.department || "—"}
+              </td>
+
+              <td className="px-4 py-1 text-gray-600 whitespace-nowrap">
                 {p.duration_start && p.duration_end
                   ? `${formatDate(p.duration_start)} - ${formatDate(p.duration_end)}`
                   : "—"}
               </td>
 
-              <td className="px-4 py-1 text-center">
+              <td className="px-4 py-1 text-center whitespace-nowrap">
                 <MenuButton
                   onEdit={() => onEdit(p)}
                   onDelete={() => onDelete(p.id)}
@@ -61,6 +68,7 @@ export default function ProjectTable({ projects, onEdit, onDelete }) {
             </tr>
           ))}
         </tbody>
+
       </table>
     </div>
   );
