@@ -179,8 +179,8 @@ export default function Navbar() {
       name: "OUR IMPACTS",
       path: "/impacts",
       title: "OUR IMPACTS",
-      text: "At this section, you can find our Press Release, Media Coverage, about our works and our members.",
-      image: "/images/ResourceHub/media.png",
+      text: "By 2030, NGOF aims to strengthen citizen and civil society influence in Cambodia’s policy and legal processes, helping ensure development decisions are fair, inclusive, and environmentally sustainable. At the same time, NGOF will build a resilient network of communities and partners capable of advocating for resource rights and monitoring key laws, supported by stronger internal systems and organizational capacities.",
+      image: "/images/project/impact.jpg",
     },
   ]
   return (
@@ -434,9 +434,9 @@ export default function Navbar() {
         </ul>
 
         {/* ✅ Donate Button responsive */}
-        <button className="hidden lg:block bg-green-600 hover:bg-orange-600 text-white px-4 sm:px-6 py-1 rounded-md text-sm sm:text-base">
+        <NavLink to="/donate" className="hidden lg:block bg-green-600 hover:bg-orange-600 text-white px-4 sm:px-6 py-1 rounded-md text-sm sm:text-base">
           Donate
-        </button>
+        </NavLink>
 
         {/* ✅ Mobile Toggle (tablet & phone only) */}
         <button
@@ -501,9 +501,12 @@ export default function Navbar() {
             {/* Language & Donate */}
             <div className="flex items-center justify-between mt-6">
               <span className="font-medium text-gray-700">Language:</span>
-              <button className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-md text-sm font-medium">
+              <NavLink
+                to="/donate" 
+                onClick={() => setMobileMenu(false)} 
+                className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-md text-sm font-medium">
                 Donate
-              </button>
+              </NavLink>
             </div>
           </div>
         )}

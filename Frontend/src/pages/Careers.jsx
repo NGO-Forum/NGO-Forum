@@ -20,7 +20,7 @@ export default function Careers() {
   return (
     <section>
       {/* HERO IMAGE + TITLE */}
-      <div className="relative w-full h-[100px] sm:h-[150px] lg:h-[150px]">
+      <div className="relative w-full h-[100px] sm:h-[150px] lg:h-[180px]">
         <img
           src="/images/GetInvolved/career.png"
           alt="Career Banner"

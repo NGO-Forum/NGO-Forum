@@ -50,7 +50,7 @@ export default function Latest() {
     <div className="min-h-screen bg-gray-50">
 
       {/* HEADER BANNER */}
-      <div className="relative w-full h-[120px] md:h-[180px]">
+      <div className="relative w-full h-[150px] md:h-[180px]">
         <img
           src="/images/ResourceHub/bg.png"
           className="w-full h-full object-cover"

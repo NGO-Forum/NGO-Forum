@@ -214,7 +214,7 @@ export default function OrganizationalStructure() {
       <section className="bg-gray-100">
 
         {/* ---------- HEADER BANNER ---------- */}
-        <div className="relative w-full h-[100px] sm:h-[150px] lg:h-[150px]">
+        <div className="relative w-full h-[100px] sm:h-[150px] lg:h-[180px]">
           <img
             src="/images/whoWeAre/Structure/bg.png"
             alt="About Banner"

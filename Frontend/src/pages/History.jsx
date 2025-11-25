@@ -5,7 +5,7 @@ export default function HistorySection() {
       <section className="w-full">
 
         {/* 🔥 Full Banner Image with Center Title */}
-        <div className="relative w-full h-[100px] sm:h-[15px] md:h-[260px] lg:h-[150px]">
+        <div className="relative w-full h-[100px] sm:h-[15px] md:h-[150px] lg:h-[180px]">
           <img
             src="/history.png"
             alt="History Banner"

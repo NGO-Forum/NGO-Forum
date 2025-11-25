@@ -25,19 +25,19 @@ export default function Home() {
     <div className="w-full m-0 p-0">
 
       {/* ===================== TOP SECTION ===================== */}
-      <section className="max-w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 bg-gray-50">
+      <section className="max-w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-1 lg:gap-6 bg-gray-50">
 
         {/* RIGHT IMAGE — mobile first */}
         <div className="order-1 lg:order-2">
           <img
-            src="/NGOF_Staff.png"
+            src="/images/home/NGOF_Staff.png"
             alt="NGO Forum Team"
-            className="shadow-md w-full object-cover h-[180px] md:h-[330px]"
+            className="shadow-md w-full object-cover h-full"
           />
         </div>
 
         {/* LEFT TEXT CONTENT */}
-        <div className="delay-show order-2 lg:order-1 text-gray-800 space-y-6 leading-relaxed m-10">
+        <div className="delay-show order-2 lg:order-1 text-gray-800 text-lg md:text-xl space-y-4 leading-relaxed p-6 lg:p-10">
 
           <p>
             <span className="font-bold">Our Vision</span> is a peaceful, inclusive, prosperous, and sustainable society and planet.
@@ -202,7 +202,7 @@ export default function Home() {
                 Enhanced people and resources rights, inclusive growth, and sustainable planet through supporting and influencing the climate smart and diverse policies and laws development and practices.
               </p>
 
-              <Link to="/latest">
+              <Link to="/pali">
                 <button className="mt-6 bg-green-700 hover:bg-green-800 text-white px-5 py-2 sm:px-6 rounded-full transition">
                   Learn More
                 </button>
@@ -222,7 +222,7 @@ export default function Home() {
                 Fostered ecosystems for transformative, resilient, and prosperous communities through capacity development, mobilizing support for implementation and monitoring of the enacted pro-poor policies and laws, and community led initiatives.
               </p>
 
-              <Link to="/latest">
+              <Link to="/sachas">
                 <button className="mt-6 bg-green-700 hover:bg-green-800 text-white px-5 py-2 sm:px-6 rounded-full transition">
                   Learn More
                 </button>
@@ -242,7 +242,7 @@ export default function Home() {
                 Strengthened a vibrant, resilient, and resourceful organization of the NGO Forum and its members through capacity development, and joint impactful initiatives.
               </p>
 
-              <Link to="/latest">
+              <Link to="/riti">
                 <button className="mt-6 bg-green-700 hover:bg-green-800 text-white px-5 py-2 sm:px-6 rounded-full transition">
                   Learn More
                 </button>

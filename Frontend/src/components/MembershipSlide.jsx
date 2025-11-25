@@ -10,7 +10,11 @@ export default function MemberSlider() {
     const loadMembers = async () => {
         try {
             const res = await api.get("/members");
-            setMembers(res.data);
+
+            // Hide disabled members
+            const activeMembers = res.data.filter(m => !m.disabled);
+
+            setMembers(activeMembers);
         } catch (err) {
             console.error("Failed to load members:", err);
         }

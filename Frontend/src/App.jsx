@@ -30,6 +30,11 @@ import Careers from "./pages/Careers";
 import Project from "./pages/Project";
 import Impacts from "./pages/Impacts";
 
+// Search
+import SearchPage from "./pages/SearchPage";
+import Donate from "./pages/Donate";
+import DonateInfo from "./pages/Infor";
+
 // ADMIN PAGES
 import AdminLayout from "./admins/page/AdminLayout";
 import PeopleAdmin from "./admins/page/PeopleAdmin";
@@ -73,6 +78,9 @@ export default function App() {
         <Route path="/careers" element={<Careers />} />
         <Route path="/project" element={<Project />} />
         <Route path="/impacts" element={<Impacts />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/donate" element={<Donate />} />
+        <Route path="/donate/info" element={<DonateInfo />} />
 
         {/* ADMIN ROUTES (NO NAVBAR/FOOTER) */}
         <Route path="/admin/login" element={<AdminLogin />} />

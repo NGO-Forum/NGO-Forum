@@ -6,6 +6,7 @@ export default function MemberForm({ member, onClose, onSave }) {
     link: "",
     logo: null,
     oldLogo: "",
+    disabled: false, // ⭐ NEW FIELD
   });
 
   useEffect(() => {
@@ -15,14 +16,17 @@ export default function MemberForm({ member, onClose, onSave }) {
         link: member.link,
         logo: null,
         oldLogo: member.logo_url ?? "",
+        disabled: member.disabled ?? false, // ⭐ load existing status
       });
     }
   }, [member]);
 
   const handleSubmit = () => {
     const fd = new FormData();
+
     fd.append("name", form.name);
     fd.append("link", form.link);
+    fd.append("disabled", form.disabled ? 1 : 0); // ⭐ send to backend
 
     if (form.logo) {
       fd.append("logo", form.logo);
@@ -39,6 +43,7 @@ export default function MemberForm({ member, onClose, onSave }) {
           {member ? "Edit Member" : "Add Member"}
         </h2>
 
+        {/* NAME */}
         <label className="block mb-1">Name</label>
         <input
           className="w-full p-2 border rounded mb-3"
@@ -46,6 +51,7 @@ export default function MemberForm({ member, onClose, onSave }) {
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
 
+        {/* LINK */}
         <label className="block mb-1">Website Link</label>
         <input
           className="w-full p-2 border rounded mb-3"
@@ -53,6 +59,18 @@ export default function MemberForm({ member, onClose, onSave }) {
           onChange={(e) => setForm({ ...form, link: e.target.value })}
         />
 
+        {/* DISABLE TOGGLE */}
+        <label className="block font-semibold mb-1">Disable Member</label>
+        <div className="flex items-center gap-2 mb-4">
+          <input
+            type="checkbox"
+            checked={form.disabled}
+            onChange={(e) => setForm({ ...form, disabled: e.target.checked })}
+          />
+          <span>{form.disabled ? "Disabled" : "Active"}</span>
+        </div>
+
+        {/* LOGO INPUT */}
         <label className="block mb-1">Logo</label>
         <input
           type="file"
@@ -68,6 +86,7 @@ export default function MemberForm({ member, onClose, onSave }) {
           />
         )}
 
+        {/* BUTTONS */}
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}

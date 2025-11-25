@@ -1,7 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Linkedin, X } from "lucide-react";
+import { useState } from "react";
 
 export default function Footer() {
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearch = () => {
+    if (searchText.trim() !== "") {
+      window.location.href = `/search?q=${encodeURIComponent(searchText)}`;
+    }
+  };
   return (
     <footer className="bg-green-700 text-white p-8 md:p-4 lg:p-12">
       <div className="max-w-full mx-auto">
@@ -22,18 +30,27 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 w-full md:w-auto">
 
             {/* Donate Button */}
-            <button className="bg-white text-green-700 px-6 py-1 rounded-md font-medium hover:bg-gray-100 w-full md:w-auto">
+            <NavLink
+              to="/donate" className="bg-white text-green-700 px-6 py-1 rounded-md font-medium hover:bg-gray-100 w-full md:w-auto">
               Donate
-            </button>
+            </NavLink>
 
             {/* Search Input */}
             <div className="relative w-full md:w-auto">
               <input
                 type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 className="px-4 py-1 w-full md:w-auto rounded-md border border-white text-black pr-10"
                 placeholder="Search"
               />
-              <span className="absolute right-3 top-1.5 text-white">🔍</span>
+              <span
+                className="absolute right-3 top-1.5 text-white cursor-pointer"
+                onClick={handleSearch}
+              >
+                🔍
+              </span>
             </div>
 
           </div>
@@ -94,7 +111,7 @@ export default function Footer() {
               </li>
             </ul>
 
-          </div> 
+          </div>
 
           {/* Column 2 */}
           <div className="w-[30%] md:w-[14%] lg:w-[10%]">

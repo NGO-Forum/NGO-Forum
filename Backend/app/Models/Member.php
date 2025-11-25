@@ -13,6 +13,7 @@ class Member extends Model
         'name',
         'logo',
         'link',
+        'disabled',
     ];
 
     protected $appends = ['logo_url'];
@@ -23,4 +24,7 @@ class Member extends Model
             ? asset('storage/' . $this->logo)
             : null;
     }
+    protected $casts = [
+        'disabled' => 'boolean',
+    ];
 }

@@ -7,7 +7,7 @@ export default function ContactUs() {
        {/* FIRST SECTION: CONTACT DETAILS */}
       <section className="w-full">
         {/* Banner */}
-        <div className="relative w-full h-[120px] sm:h-[120px] md:h-[160px]">
+        <div className="relative w-full h-[120px] sm:h-[150px] md:h-[180px]">
           <img
             src="/contact-us.png"
             alt="Contact Banner"

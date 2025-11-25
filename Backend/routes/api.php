@@ -14,7 +14,15 @@ use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\DonationController;
 
+
+// donation store
+Route::post('/donations', [DonationController::class, 'store']);
+
+
+Route::get('/search', [SearchController::class, 'search']);
 
 // Membership logo
 Route::get('/members', [MemberController::class, 'index']);
@@ -113,4 +121,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/members', [MemberController::class, 'store']);
     Route::put('/members/{member}', [MemberController::class, 'update']); // for _method=PUT
     Route::delete('/members/{member}', [MemberController::class, 'destroy']);
+
+    // Donate
+    Route::get('/donations', [DonationController::class, 'index']);
 });

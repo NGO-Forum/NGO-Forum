@@ -48,7 +48,7 @@ export default function Libray() {
     <div className="w-full bg-white">
 
       {/* HERO */}
-      <div className="relative w-full h-[100px] sm:h-[150px] lg:h-[150px]">
+      <div className="relative w-full h-[100px] sm:h-[150px] lg:h-[180px]">
         <img
           src="/images/ResourceHub/library.jpg"
           alt="Library Banner"

@@ -27,6 +27,10 @@ import Project from "./pages/Project";
 import Impacts from "./pages/Impacts";
 
 
+// Search
+import SearchPage from "./pages/SearchPage";
+import Donate from "./pages/Donate";
+
 // ADMIN PAGES
 import AdminLayout from "./admins/page/AdminLayout";
 import PeopleAdmin from "./admins/page/PeopleAdmin";
@@ -60,6 +64,9 @@ const router = createBrowserRouter([
   { path: "/careers", element: <Careers /> },
   { path: "/project", element: <Project /> },
   { path: "/impacts", element: <Impacts /> },
+  { path: "/search", element: <SearchPage /> },
+  { path: "/donate", element: <Donate /> },
+
 
 
   // ADMIN ROUTES

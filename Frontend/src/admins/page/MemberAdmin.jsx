@@ -99,6 +99,27 @@ export default function MemberAdmin() {
     }
   };
 
+  const toggleDisable = async (member) => {
+    const formData = new FormData();
+    formData.append("disabled", member.disabled ? 0 : 1);
+    formData.append("_method", "PUT");
+
+    try {
+      await api.post(`/members/${member.id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      loadMembers();
+    } catch (err) {
+      console.error(err);
+      setStatus({
+        open: true,
+        type: "error",
+        message: "Failed to update status.",
+      });
+    }
+  };
+
 
   // Pagination calculations
   const indexOfLast = currentPage * itemsPerPage;
@@ -132,6 +153,7 @@ export default function MemberAdmin() {
               <th className="px-3 py-2 text-left">Logo</th>
               <th className="px-3 py-2 text-left">Organization Name</th>
               <th className="px-3 py-2 text-left">Website Link</th>
+              <th className="px-3 py-2 text-left">Disable</th>
               <th className="px-3 py-2 text-center">Actions</th>
             </tr>
           </thead>
@@ -164,6 +186,14 @@ export default function MemberAdmin() {
                     >
                       {m.link}
                     </a>
+                  </td>
+
+                  <td className="px-3 py-2">
+                    {m.disabled ? (
+                      <span className="text-red-600 font-semibold">Disabled</span>
+                    ) : (
+                      <span className="text-green-600 font-semibold">Active</span>
+                    )}
                   </td>
 
                   <td className="px-3 py-2 text-center">

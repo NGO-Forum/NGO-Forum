@@ -19,7 +19,11 @@ class MemberController extends Controller
             'name' => 'required|string',
             'link' => 'nullable|string',
             'logo' => 'nullable|image|max:2048',
+            'disabled' => 'boolean',
         ]);
+
+        // Default disabled to false if not provided
+        $data['disabled'] = $request->boolean('disabled', false);
 
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('logos', 'public');
@@ -36,7 +40,13 @@ class MemberController extends Controller
             'name' => 'sometimes|string',
             'link' => 'nullable|string',
             'logo' => 'nullable|image|max:2048',
+            'disabled' => 'boolean',
         ]);
+
+        // Default false if no value passed
+        if ($request->has('disabled')) {
+            $data['disabled'] = $request->boolean('disabled');
+        }
 
         if ($request->hasFile('logo')) {
             if ($member->logo && Storage::disk('public')->exists($member->logo)) {
