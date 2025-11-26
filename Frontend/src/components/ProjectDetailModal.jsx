@@ -69,6 +69,11 @@ export default function ProjectDetailModal({ open, project, onClose }) {
                             className="w-full max-h-[380px] rounded-lg object-cover"
                         />
 
+                        {/* NAME OVERLAY ON IMAGE */}
+                        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent px-4 py-3 rounded-b-lg">
+                            <h2 className="text-white text-lg md:text-xl font-bold drop-shadow">{project.name}</h2>
+                        </div>
+
                         {/* LEFT ARROW */}
                         {images.length > 1 && (
                             <button
@@ -97,8 +102,6 @@ export default function ProjectDetailModal({ open, project, onClose }) {
                     </div>
                 )}
 
-                <h2 className="text-xl md:text-2xl mb-3 font-bold text-green-700">{project.name}</h2>
-
                 {/* SUMMARY */}
                 <div className="mb-3">
                     <h3 className="font-semibold text-green-700 text-lg">Summary</h3>
@@ -117,7 +120,7 @@ export default function ProjectDetailModal({ open, project, onClose }) {
 
                 {/* DONOR */}
                 <div className="mb-3">
-                    <h3 className="font-semibold text-green-700 text-lg">Donor: <span className="text-gray-700 text-sm md:text-lg">{project.donor || "—"}</span></h3>
+                    <h3 className="font-semibold text-green-700 text-lg">Donors: <span className="text-gray-700 text-sm md:text-lg">{project.donor || "—"}</span></h3>
                 </div>
 
                 {/* OBJECTIVES */}

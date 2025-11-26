@@ -113,7 +113,7 @@ export default function Project() {
 
               {/* Program Title */}
               <div className="text-left">
-                <h2 className="tex-2xl md:text-3xl lg:text-4xl font-bold text-green-700">
+                <h2 className="tex-xl md:text-3xl lg:text-4xl font-bold text-green-700">
                   {programInfo[dept]?.title || dept}
                 </h2>
                 <p className="text-gray-600 text-sm md:text-lg italic mt-2">

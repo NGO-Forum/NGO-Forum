@@ -5,26 +5,40 @@ import MemberSlider from "../components/MembershipSlide";
 export default function Membership() {
 
   const [members, setMembers] = useState([]);
+  const [networks, setNetworks] = useState([]);
 
+  // Load Members
   useEffect(() => {
+    const loadMembers = async () => {
+      try {
+        const res = await api.get("/members");
+        setMembers(res.data);
+      } catch (error) {
+        console.error("Failed to load members:", error);
+      }
+    };
     loadMembers();
   }, []);
 
-  const loadMembers = async () => {
-    try {
-      const res = await api.get("/members"); // your API response
-      setMembers(res.data);
-    } catch (error) {
-      console.error("Failed to load members:", error);
-    }
-  };
+  // Load Networks + Files
+  useEffect(() => {
+    const loadNetworks = async () => {
+      try {
+        const res = await api.get("/networks");
+        setNetworks(res.data);
+      } catch (err) {
+        console.error("Failed to load networks:", err);
+      }
+    };
+    loadNetworks();
+  }, []);
 
   return (
     <div className="bg-gray-50 min-h-screen">
 
       {/* HERO SECTION */}
       <section className="flex flex-col lg:flex-row bg-white shadow">
-        
+
         {/* Left image */}
         <div className="w-full lg:w-[55%] h-64 md:h-80 lg:h-auto">
           <img
@@ -212,6 +226,55 @@ export default function Membership() {
             <p className="mt-2 text-gray-600 text-sm md:text-base">
               Application forms and Membership fee may be obtained from the NGO Forum office at: #9-11, Street 476, Toul Tompoung I, Phnom Penh, Tel: 023 214 429 or can be download the application from from here: Membership Application Form and Membership Fee.
             </p>
+          </details>
+
+          {/* Navifation */}
+          <details className="py-5 group">
+            <summary className="cursor-pointer text-lg md:text-2xl font-medium text-gray-900 flex justify-between items-center hover:text-green-700">
+              Our Existing Networks
+              <svg
+                className="ml-2 h-5 w-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+
+            <ol className="list-decimal list-inside mt-4 text-sm md:text-base text-gray-800 space-y-6">
+
+              {networks.map((network) => (
+                <li key={network.id}>
+                  <span className="font-semibold">{network.name}</span>
+
+                  <ul className="list-none mt-2 flex flex-col md:flex-row gap-2 md:gap-6">
+
+                    {network.files
+                      .slice()
+                      .sort(
+                        (a, b) =>
+                          ["TOR", "Steering Committee", "Action Plan"].indexOf(a.title) -
+                          ["TOR", "Steering Committee", "Action Plan"].indexOf(b.title)
+                      )
+                      .map((file) => (
+                        <li key={file.id}>
+                          <a
+                            href={file.file_url}
+                            target="_blank"
+                            className="flex items-center gap-2 text-blue-600 hover:underline"
+                          >
+                            📄 {file.title}
+                          </a>
+                        </li>
+                      ))}
+
+                  </ul>
+                </li>
+              ))}
+
+            </ol>
           </details>
 
         </div>

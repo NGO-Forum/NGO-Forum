@@ -16,7 +16,13 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\NetworkController;
+use App\Http\Controllers\ImpactController;
 
+
+// Impacts
+Route::get('/impacts', [ImpactController::class, 'index']);
+Route::get('/impacts/{id}', [ImpactController::class, 'show']);
 
 // donation store
 Route::post('/donations', [DonationController::class, 'store']);
@@ -60,6 +66,7 @@ Route::post('/admin/login', [AdminAuthController::class, 'login']);
 // Posts routes
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post}', [PostController::class, 'show']);
+Route::post('/posts', [PostController::class, 'store']);
 
 // Jobs routes
 Route::get('/jobs', [JobController::class, 'index']);
@@ -88,7 +95,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/people/{person}', [PeopleController::class, 'destroy']);
 
     // Posts management
-    Route::post('/posts', [PostController::class, 'store']);
     Route::put('/posts/{post}', [PostController::class, 'update']);
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 
@@ -124,4 +130,22 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Donate
     Route::get('/donations', [DonationController::class, 'index']);
+
+    // File Member
+    // Networks
+    Route::get('/networks', [NetworkController::class, 'index']);
+    Route::post('/networks', [NetworkController::class, 'store']);
+    Route::put('/networks/{id}', [NetworkController::class, 'update']);
+    Route::delete('/networks/{id}', [NetworkController::class, 'destroy']);
+
+    // Files
+    Route::post('/network-files', [NetworkController::class, 'uploadFile']);
+    Route::put('/network-files/{id}', [NetworkController::class, 'updateFile']);
+    Route::delete('/network-files/{id}', [NetworkController::class, 'deleteFile']);
+
+
+    // Impacts
+    Route::post('/impacts', [ImpactController::class, 'store']);
+    Route::put('/impacts/{id}', [ImpactController::class, 'update']); // for PUT with file
+    Route::delete('/impacts/{id}', [ImpactController::class, 'destroy']);
 });

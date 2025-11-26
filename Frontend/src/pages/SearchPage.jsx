@@ -24,10 +24,6 @@ export default function SearchPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-8">
-        Search Results for: <span className="text-green-600">"{q}"</span>
-      </h1>
-
       {Object.entries(data).map(([model, items]) =>
         items.length > 0 ? (
           <Section key={model} model={model} items={items} />

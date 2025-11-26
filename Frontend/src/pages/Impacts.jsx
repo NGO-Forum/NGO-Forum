@@ -1,37 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../API/api";
+import ImpactDetailModal from "../components/ImpactDetailModal";
 
-export default function Project() {
+export default function Impact() {
+  const [impacts, setImpacts] = useState([]);
+  const [selectedImpact, setSelectedImpact] = useState(null);
+  const [showDetail, setShowDetail] = useState(false);
 
+  useEffect(() => {
+    api.get("/impacts").then((res) => {
+      setImpacts(res.data);
+    });
+  }, []);
 
-  // FIXED ORDER ALWAYS
-  const fixedOrder = ["RITI", "SACHAS", "PALI", "MACOR"];
-
-  // Program titles + subtitles
-  const programInfo = {
-    RITI: {
-      title: "Resilient, Innovative, and Transformative Institution ( RITI )",
-      subtitle:
-        "RITI aims are to transform the NGOF, NGOF’s members and their partners/communities (incl. ACs, CPA, CFi, and CF) so that they will become resilient, innovative, and transformative institution.",
-    },
-    SACHAS: {
-      title:
-        "Solidarity Actions for Community Harmonization and Sustainability ( SACHAS )",
-      subtitle:
-        "SACHAS aims at supporting NGOF’s members, partners and the communities to operationalize key laws and policies mentioned above into practices, and to support their local-led initiatives to transform their communities toward harmonious, prosperous, resilient and sustainable one.",
-    },
-    PALI: {
-      title: "Policies and Legal Influences ( PALI )",
-      subtitle:
-        "ALI aims to engage and influence global, regional and national laws and policies effecting the poor, indigenous, marginalized, and vulnerable groups and people.",
-    },
-    MACOR: {
-      title:
-        "Management of Accounting, Competencies, Operations and Resources ( MACOR )",
-      subtitle:
-        "MACOR aims at supporting the NGOF to become a transparent, accountable, responsible and sustainable membership-based organization.",
-    },
-  };
 
   return (
     <section>
@@ -78,9 +59,77 @@ export default function Project() {
               className="rounded-xl w-full h-64 md:h-[350px] lg:h-[400px] object-cover shadow-lg"
             />
           </div>
-
         </div>
       </section>
+
+      {/* IMPACT CARDS (FLAT LIST) */}
+      <div className="max-w-full mx-auto px-4 py-6 md:px-10 lg:px-12">
+        <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold text-green-700 tracking-wide mb-4 md:mb-6">
+          OUR IMPACTS
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8">
+
+          {impacts.map((imp) => (
+            <div
+              key={imp.id}
+              className="border rounded-xl bg-white shadow hover:shadow-xl transition p-4"
+            >
+              {/* IMAGE */}
+              {imp.image_urls?.length > 0 && (
+                <img
+                  src={imp.image_urls[0]}
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              )}
+
+              {/* NAME */}
+              <h3 className="text-lg md:text-xl font-bold mt-3 line-clamp-1">
+                {imp.name}
+              </h3>
+
+              {/* program */}
+              <p className="text-gray-600 text-sm mt-3">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {(Array.isArray(imp.program) ? imp.program : [imp.program])
+                    .filter(Boolean)
+                    .map((p, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium"
+                      >
+                        {p}
+                      </span>
+                    ))}
+                </div></p>
+
+              {/* SUMMARY */}
+              <p className="text-gray-600 text-sm mt-2 line-clamp-3">
+                {imp.summary}
+              </p>
+
+              {/* READ MORE */}
+              <button
+                className="text-white bg-green-600 rounded-lg font-medium mt-3 px-3 py-1 inline-block"
+                onClick={() => {
+                  setSelectedImpact(imp);
+                  setShowDetail(true);
+                }}
+              >
+                Read More
+              </button>
+            </div>
+          ))}
+
+        </div>
+      </div>
+
+      {/* DETAIL MODAL */}
+      <ImpactDetailModal
+        open={showDetail}
+        impact={selectedImpact}
+        onClose={() => setShowDetail(false)}
+      />
+
     </section>
   );
 }

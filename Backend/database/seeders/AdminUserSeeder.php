@@ -35,6 +35,12 @@ class AdminUserSeeder extends Seeder
                 'password' => Hash::make('bunna2025@NGOF'),
                 'is_admin' => true,
             ],
+            [
+                'name' => 'Admin',
+                'email' => 'info@ngoforum.org.kh',
+                'password' => Hash::make('info2025@NGOF'),
+                'is_admin' => true,
+            ],
         ];
 
         foreach ($users as $user) {

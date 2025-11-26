@@ -129,6 +129,30 @@ export default function AdminLayout() {
           >
             Member Logo
           </NavLink>
+
+          <NavLink
+            to="/admin/network"
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-lg transition ${isActive
+                ? "bg-green-600 text-white"
+                : "text-gray-700 hover:bg-gray-100 hover:text-green-700"
+              }`
+            }
+          >
+            Networks
+          </NavLink>
+
+          <NavLink
+            to="/admin/impact"
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-lg transition ${isActive
+                ? "bg-green-600 text-white"
+                : "text-gray-700 hover:bg-gray-100 hover:text-green-700"
+              }`
+            }
+          >
+            Impacts
+          </NavLink>
         </nav>
       </aside>
 

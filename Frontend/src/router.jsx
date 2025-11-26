@@ -44,6 +44,8 @@ import JobAdmin from "./admins/page/JobAdmin";
 import VolunteerAdmin from "./admins/page/VolunteerAdmin";
 import ProjectAdmin from "./admins/page/ProjectAdmin";
 import MemberAdmin from "./admins/page/MemberAdmin";
+import Network from "./admins/page/NetworksAdmin";
+import Impact from "./admins/page/ImpactsAdmin";
 
 
 const router = createBrowserRouter([
@@ -88,6 +90,8 @@ const router = createBrowserRouter([
       { path: "volunteer", element: <VolunteerAdmin /> },
       { path: "project", element: <ProjectAdmin /> },
       { path: "member", element: <MemberAdmin /> },
+      { path: "network", element: <Network /> },
+      { path: "impact", element: <Impact /> },
     ],
   },
 ]);

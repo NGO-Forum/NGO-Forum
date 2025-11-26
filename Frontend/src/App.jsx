@@ -26,6 +26,7 @@ import Membership from "./pages/Membership";
 import Volunteer from "./pages/Volunteer";
 import Careers from "./pages/Careers";
 
+
 // Our Projects
 import Project from "./pages/Project";
 import Impacts from "./pages/Impacts";
@@ -48,6 +49,8 @@ import JobAdmin from "./admins/page/JobAdmin";
 import VolunteerAdmin from "./admins/page/VolunteerAdmin";
 import ProjectAdmin from "./admins/page/ProjectAdmin";
 import MemberAdmin from "./admins/page/MemberAdmin";
+import Network from "./admins/page/NetworksAdmin";
+import Impact from "./admins/page/ImpactsAdmin";
 
 export default function App() {
   const location = useLocation();
@@ -102,6 +105,8 @@ export default function App() {
           <Route path="volunteers" element={<VolunteerAdmin />} />
           <Route path="project" element={<ProjectAdmin />} />
           <Route path="member" element={<MemberAdmin />} />
+          <Route path="network" element={<Network />} />
+          <Route path="impact" element={<Impact />} />
         </Route>
       </Routes>
 

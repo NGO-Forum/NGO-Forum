@@ -60,6 +60,9 @@ class SearchController extends Controller
             'projects' => $this->safeSearch(new \App\Models\Project, 
                 ['name', 'summary', 'donor'], $q),
 
+            'impacts' => $this->safeSearch(new \App\Models\Impact, 
+                ['name', 'summary', 'program'], $q),
+
             'volunteers' => $this->safeSearch(new \App\Models\Volunteer, 
                 ['name', 'skills'], $q),
         ]);
