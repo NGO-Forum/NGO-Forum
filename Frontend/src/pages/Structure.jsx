@@ -244,7 +244,7 @@ export default function OrganizationalStructure() {
           </h2>
 
           {/* ---------- DIRECTORS LIST ---------- */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4 text-center">
 
             {sortDirectors(data.directors).map((d, i) => (
               <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
@@ -254,7 +254,7 @@ export default function OrganizationalStructure() {
                 }}
               >
 
-                <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
+                <div className="blob-structure w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] cursor-pointer overflow-hidden">
                   <img
                     src={imgUrl(d.img)}
                     alt={d.name}
@@ -282,7 +282,7 @@ export default function OrganizationalStructure() {
           </h2>
 
           {/* ---------- DIRECTORS LIST ---------- */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4 text-center">
 
             {sortAdvisors(data.advisors).map((d, i) => (
               <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
@@ -292,7 +292,7 @@ export default function OrganizationalStructure() {
                 }}
               >
 
-                <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
+                <div className="blob-structure w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] cursor-pointer overflow-hidden">
                   <img
                     src={imgUrl(d.img)}
                     alt={d.name}
@@ -318,7 +318,7 @@ export default function OrganizationalStructure() {
             Senior Management Team
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4 text-center">
 
             {sortManagersFirst(getManagementTeam()).map((d, i) => (
               <div key={i} className="cursor-pointer flex flex-col items-center"
@@ -328,7 +328,7 @@ export default function OrganizationalStructure() {
                 }}
               >
 
-                <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] overflow-hidden">
+                <div className="blob-structure w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] overflow-hidden">
                   <img
                     src={imgUrl(d.img)}
                     alt={d.name}
@@ -358,7 +358,7 @@ export default function OrganizationalStructure() {
           <p className="mb-4 md:mb-12 mt-2 text-lg">Policies and Legal Influences</p>
 
           {/* ---------- DIRECTORS LIST ---------- */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4 text-center">
 
             {sortByRolePriority(data.pili).map((d, i) => (
               <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
@@ -368,7 +368,7 @@ export default function OrganizationalStructure() {
                 }}
               >
 
-                <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
+                <div className="blob-structure w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] cursor-pointer overflow-hidden">
                   <img
                     src={imgUrl(d.img)}
                     alt={d.name}
@@ -398,7 +398,7 @@ export default function OrganizationalStructure() {
           <p className="mb-4 md:mb-12 mt-2 text-lg">Solidarity Actions for Community Harmonization and Sustainability</p>
 
           {/* ---------- DIRECTORS LIST ---------- */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4 text-center">
 
             {sortByRolePriority(data.sachas).map((d, i) => (
               <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
@@ -408,7 +408,7 @@ export default function OrganizationalStructure() {
                 }}
               >
 
-                <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
+                <div className="blob-structure w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] cursor-pointer overflow-hidden">
                   <img
                     src={imgUrl(d.img)}
                     alt={d.name}
@@ -438,7 +438,7 @@ export default function OrganizationalStructure() {
           <p className="mb-4 md:mb-12 mt-2 text-lg">Resilient, Innovative, and Transformative Institution</p>
 
           {/* ---------- DIRECTORS LIST ---------- */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4 text-center">
 
             {sortByRolePriority(data.riti).map((d, i) => (
               <div key={i} className="cursor-pointer flex flex-col items-center justify-center"
@@ -448,7 +448,7 @@ export default function OrganizationalStructure() {
                 }}
               >
 
-                <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
+                <div className="blob-structure w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] cursor-pointer overflow-hidden">
                   <img
                     src={imgUrl(d.img)}
                     alt={d.name}
@@ -478,7 +478,7 @@ export default function OrganizationalStructure() {
           <p className="mb-4 md:mb-12 mt-2 text-lg">Management of Accounting, Competencies, Operations and Resources</p>
 
           {/* ---------- DIRECTORS LIST ---------- */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-14 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4 text-center">
 
             {sortByRolePriority(data.macor).map((d, i) => (
 
@@ -489,7 +489,7 @@ export default function OrganizationalStructure() {
                 }}
               >
 
-                <div className="blob-structure w-[220px] h-[220px] lg:w-[260px] lg:h-[260px] cursor-pointer overflow-hidden">
+                <div className="blob-structure w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] cursor-pointer overflow-hidden">
                   <img
                     src={imgUrl(d.img)}
                     alt={d.name}
@@ -511,7 +511,7 @@ export default function OrganizationalStructure() {
 
       {showModal && selectedPerson && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full p-6 relative h-[98%] md:h-auto lg:h-auto overflow-auto">
+          <div className="bg-white rounded-2xl shadow-xl max-w-5xl w-full p-6 relative h-[98%] md:h-auto overflow-auto">
 
             {/* Close Button */}
             <button
@@ -521,24 +521,24 @@ export default function OrganizationalStructure() {
               ✕
             </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
               {/* LEFT: Image */}
-              <div className="flex justify-center mt-2 lg:mt-6">
+              <div className="flex justify-center mt-2 mb-4 md:mb-0">
                 <img
                   src={imgUrl(selectedPerson.img)}
                   alt={selectedPerson.name}
-                  className="w-72 h-72 md:w-full md:h-full lg:w-80 lg:h-80 object-cover rounded-3xl shadow-md"
+                  className="w-72 h-72 lg:w-80 lg:h-80 object-cover rounded-3xl shadow-md"
                 />
               </div>
 
               {/* RIGHT: Details */}
-              <div>
+              <div className="md:col-span-2 col-span-1">
                 <h2 className="text-2xl lg:text-3xl font-bold text-green-700">
                   {selectedPerson.name}
                 </h2>
                 <p className="text-gray-600 text-lg lg:text-xl mt-1">
-                  {selectedPerson.role}
+                  {selectedPerson.position}
                 </p>
 
                 <button
@@ -549,7 +549,7 @@ export default function OrganizationalStructure() {
 
                 <hr className="my-5 border-dashed" />
 
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-xs">
                   {selectedPerson.description || "No bio available."}
                 </p>
 

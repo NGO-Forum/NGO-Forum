@@ -31,7 +31,7 @@ export default function HistorySection() {
         </div>
       </section>
 
-      <section class="max-w-full mx-auto mt-1 md:mt-4 px-6">
+      <section class="max-w-full mx-auto mt-1 md:mt-4 px-6 md:px-12">
 
         <div class="relative">
 
@@ -41,7 +41,6 @@ export default function HistorySection() {
 
             <div class="relative flex items-center justify-start">
               <div class="w-1/2 pr-10">
-                <h3 class="text-2xl font-semibold text-gray-800 text-right">Formation in the 1980s</h3>
                 <p class="text-gray-600 leading-relaxed mt-3">
                   The NGOF has a long history.  It was established in the 1980s by international NGOs working together to advocate an end to the international aid embargo on Cambodia, promote the need for humanitarian assistance, and support the peacebuilding process in Cambodia.  At that time, a small number of international NGOs worked in Cambodia in defiance of the aid embargo, but local NGOs were not allowed to exist.
                 </p>
@@ -57,7 +56,6 @@ export default function HistorySection() {
                 <div class="w-6 h-6 bg-green-600 rounded-full border-4 border-white shadow"></div>
               </div>
               <div class="w-1/2 pl-10">
-                <h3 class="text-2xl font-semibold text-gray-800">Transition Toward Local Leadership (1996–2000)</h3>
                 <p class="text-gray-600 leading-relaxed mt-3">
                   After the Paris Peace Accords in 1991, local NGOs were allowed to form, and the NGO Forum became a Cambodian-based membership organization for both local and international NGOs. NGOF began to work on a broader range of issues, such as an international ban on land mines, the creation of a permanent tribunal for crimes against humanity, and concerns about the impacts of development aid.
                 </p>
@@ -66,7 +64,6 @@ export default function HistorySection() {
 
             <div class="relative flex items-center justify-start">
               <div class="w-1/2 pr-10">
-                <h3 class="text-2xl font-semibold text-gray-800 text-right">First Cambodian Executive Director (2006)</h3>
                 <p class="text-gray-600 leading-relaxed mt-3">
                   International NGOs continued to play a dominant role in the NGOF up until 1996, when the NGOF’s International Steering Committee was disbanded and replaced by a local Management Committee.  From 1997 onwards, local NGOs became increasingly involved in NGOF, with meetings held predominately in Khmer and with Cambodians playing the dominant role in NGOF activities.  In the year 2000, the NGOF voted in a fully Cambodian Management Committee for the first time. In 2006, the NGOF appointed its first Cambodian Executive Director.
                 </p>
@@ -82,7 +79,6 @@ export default function HistorySection() {
                 <div class="w-6 h-6 bg-green-600 rounded-full border-4 border-white shadow"></div>
               </div>
               <div class="w-1/2 pl-10">
-                <h3 class="text-2xl font-semibold text-gray-800">Expansion and Strengthening Provincial Networks</h3>
                 <p class="text-gray-600 leading-relaxed mt-3">
                   The NGOF facilitated its members and NGO networks working on Gender, Trade and Economic Development, Environmental Awareness, Pesticides Reduction, Mekong Basin Community Rights, Land Rights, Resettlement, and Forest Livelihoods.
                 </p>
@@ -92,7 +88,6 @@ export default function HistorySection() {
 
             <div class="relative flex items-center justify-start">
               <div class="w-1/2 pr-10">
-                <h3 class="text-2xl font-semibold text-gray-800 text-right">Broadening Policy Advocacy Focus (2000s–Present)</h3>
                 <p class="text-gray-600 leading-relaxed mt-3">
                   Due to rapid growth and new issues, the NGOF expanded its staff to meet the expectations of member organizations. It began to strengthen cooperation with provincial NGOs and to help NGOs build advocacy-linkages from the grassroots to the national level aimed at strengthening the effectiveness of NGO advocacy on land issues. NGOF extended its engagement with CBOs engaged in Community Forestry (CF), Community Fishery (Cfi), and Agriculture Cooperatives (Cs) in Cambodia.
                 </p>
@@ -108,7 +103,6 @@ export default function HistorySection() {
                 <div class="w-6 h-6 bg-green-600 rounded-full border-4 border-white shadow"></div>
               </div>
               <div class="w-1/2 pl-10">
-                <h3 class="text-2xl font-semibold text-gray-800">Strengthening NGO Networks and Thematic Working Groups</h3>
                 <p class="text-gray-600 leading-relaxed mt-3">
                   In 2012, the NGOF shifted its registration with the Ministry of Foreign Affairs and International Cooperation and was registered with the Ministry of Interior (under the reference Sor Cho Nor #304, issued on 07 March 2012).  
                 </p>
@@ -118,7 +112,6 @@ export default function HistorySection() {
             {/* {left} */}
             <div class="relative flex items-center justify-start">
               <div class="w-1/2 pr-10">
-                <h3 class="text-2xl font-semibold text-gray-800 text-right">Legal Registration with the Ministry of Interior (2012)</h3>
                 <p class="text-gray-600 leading-relaxed mt-3">
                   Since then, the NGOF has continued to focus on policy advocacy in the areas of natural resource governance, development policies, land and livelihoods, environment, agriculture, climate change, and socio-economic development. Especially, the NGOF has made significant contributions to the National Strategic Development Plan (NSDP), and Public Financial Management Reform.
                 </p>

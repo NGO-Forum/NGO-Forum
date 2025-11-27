@@ -25,12 +25,26 @@ export default function PeopleForm({
 
   const [form, setForm] = useState(empty);
 
+  const [status, setStatus] = useState({
+    open: false,
+    type: "success",
+    message: "",
+  });
+
+  // ---------------------------------------------------------
+  // Load data when editing
+  // ---------------------------------------------------------
   useEffect(() => {
     if (editing) {
       setForm({
-        ...editing,
-        education: editing.education ? editing.education.join("\n") : "",
+        name: editing.name || "",
+        role: editing.role || "",
+        position: editing.position || "",
+        email: editing.email || "",
         img: editing.img || "",
+        description: editing.description || "",
+        phone: editing.phone || "",
+        education: editing.education ? editing.education.join("\n") : "",
       });
 
       if (editing.category) {
@@ -41,32 +55,39 @@ export default function PeopleForm({
     }
   }, [editing]);
 
+  // ---------------------------------------------------------
+  // SUBMIT FORM
+  // ---------------------------------------------------------
   const submit = async (e) => {
     e.preventDefault();
 
     const data = new FormData();
-    data.append("name", form.name);
-    data.append("role", form.role);
-    data.append("position", form.position);
-    data.append("phone", form.phone);
-    data.append("email", form.email);
-    data.append("category", category);
-    data.append("description", form.description);
 
+    data.append("name", form.name || "");
+    data.append("role", form.role || "");
+    data.append("position", form.position || "");
+    data.append("phone", form.phone || "");
+    data.append("email", form.email || "");
+    data.append("category", category || "");
+    data.append("description", form.description || "");
 
+    // Education array
     const eduArray = form.education
       ? form.education.split("\n").map((v) => v.trim())
       : [];
+
     eduArray.forEach((item, index) => {
       data.append(`education[${index}]`, item);
     });
 
+    // Image upload
     if (form.img instanceof File) {
       data.append("img", form.img);
     }
 
     try {
       if (!editing) {
+        // CREATE
         await api.post("/people", data);
         setStatus({
           open: true,
@@ -74,8 +95,10 @@ export default function PeopleForm({
           message: "Person created successfully!",
         });
       } else {
-        form.append("_method", "PUT");   // ⭐ REQUIRED ⭐
+        // UPDATE
+        data.append("_method", "PUT"); // FIXED
         await api.post(`/people/${editing.id}`, data);
+
         setStatus({
           open: true,
           type: "success",
@@ -95,12 +118,6 @@ export default function PeopleForm({
       });
     }
   };
-
-  const [status, setStatus] = useState({
-    open: false,
-    type: "success",
-    message: "",
-  });
 
   return (
     <section className="bg-white p-6 rounded-xl shadow-md max-w-5xl mx-auto">
@@ -123,7 +140,6 @@ export default function PeopleForm({
         </button>
       </div>
 
-      {/* TWO COLUMN FORM */}
       <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         {/* LEFT COLUMN */}
@@ -132,9 +148,8 @@ export default function PeopleForm({
           <div>
             <label className="font-semibold text-gray-700">Full Name</label>
             <input
-              placeholder="Enter name"
               className="input-field"
-              value={form.name}
+              value={form.name || ""}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
           </div>
@@ -142,9 +157,8 @@ export default function PeopleForm({
           <div>
             <label className="font-semibold text-gray-700">Role</label>
             <input
-              placeholder="Executive Director, Program Manager..."
               className="input-field"
-              value={form.role}
+              value={form.role || ""}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
             />
           </div>
@@ -152,9 +166,8 @@ export default function PeopleForm({
           <div>
             <label className="font-semibold text-gray-700">Position</label>
             <input
-              placeholder="Coordinator, Officer..."
               className="input-field"
-              value={form.position}
+              value={form.position || ""}
               onChange={(e) => setForm({ ...form, position: e.target.value })}
             />
           </div>
@@ -163,7 +176,7 @@ export default function PeopleForm({
             <label className="font-semibold text-gray-700">Department</label>
             <select
               className="input-field"
-              value={category}
+              value={category || ""}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="director">Directors</option>
@@ -184,9 +197,8 @@ export default function PeopleForm({
           <div>
             <label className="font-semibold text-gray-700">Email</label>
             <input
-              placeholder="example@domain.com"
               className="input-field"
-              value={form.email}
+              value={form.email || ""}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
           </div>
@@ -194,9 +206,8 @@ export default function PeopleForm({
           <div>
             <label className="font-semibold text-gray-700">Phone</label>
             <input
-              placeholder="+855 12 345 678"
               className="input-field"
-              value={form.phone}
+              value={form.phone || ""}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
             />
           </div>
@@ -207,14 +218,12 @@ export default function PeopleForm({
               type="file"
               accept="image/*"
               className="input-field"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                if (file) setForm({ ...form, img: file });
-              }}
+              onChange={(e) =>
+                setForm({ ...form, img: e.target.files[0] })
+              }
             />
           </div>
 
-          {/* IMAGE PREVIEW */}
           {form.img && (
             <div className="w-32 h-32 rounded-full overflow-hidden shadow mx-auto">
               <img
@@ -230,15 +239,14 @@ export default function PeopleForm({
 
         </div>
 
-        {/* FULL-WIDTH TEXT AREAS */}
+        {/* TEXT AREAS */}
         <div className="md:col-span-2 space-y-4">
 
           <div>
             <label className="font-semibold text-gray-700">Description</label>
             <textarea
-              placeholder="Short biography..."
               className="input-field h-28"
-              value={form.description}
+              value={form.description || ""}
               onChange={(e) =>
                 setForm({ ...form, description: e.target.value })
               }
@@ -248,9 +256,8 @@ export default function PeopleForm({
           <div>
             <label className="font-semibold text-gray-700">Education</label>
             <textarea
-              placeholder="One education per line"
               className="input-field h-28"
-              value={form.education}
+              value={form.education || ""}
               onChange={(e) =>
                 setForm({ ...form, education: e.target.value })
               }
@@ -282,7 +289,6 @@ export default function PeopleForm({
 
       </form>
 
-      {/* STATUS MODAL */}
       <StatusModal
         open={status.open}
         type={status.type}
@@ -290,6 +296,5 @@ export default function PeopleForm({
         onClose={() => setStatus({ ...status, open: false })}
       />
     </section>
-
   );
 }
