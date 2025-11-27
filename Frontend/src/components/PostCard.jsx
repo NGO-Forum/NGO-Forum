@@ -138,6 +138,21 @@ export default function PostCard({ post }) {
         <p className="text-gray-800 whitespace-pre-line leading-relaxed mb-6">
           {post.description}
         </p>
+
+        {/* Detail File */}
+        {post.file && (
+          <div className="mt-4">
+            <a
+              href={`http://44.205.95.55/storage/${post.file}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm lg:text-lg font-semibold text-green-600 hover:text-green-900"
+            >
+              View Document Detail ↗
+            </a>
+          </div>
+        )}
+
       </Modal>
 
     </>

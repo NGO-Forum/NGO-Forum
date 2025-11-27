@@ -22,12 +22,17 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
     message: "",
   });
 
-  // Load form data when editing
+  const formatDateForInput = (dateStr) => {
+    if (!dateStr) return "";
+    const d = new Date(dateStr);
+    return d.toISOString().slice(0, 16);
+  };
+
   useEffect(() => {
     if (editingPost) {
       setTitle(editingPost.title);
       setDescription(editingPost.description);
-      setPublishedAt(editingPost.published_at || "");
+      setPublishedAt(formatDateForInput(editingPost.published_at));
       setDepartment(editingPost.department);
 
       setOldImages(editingPost.images || []);
@@ -36,8 +41,13 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
           (img) => `http://44.205.95.55/storage/${img}`
         ) || []
       );
+
+      if (editingPost.file) {
+        setOldFile(`http://44.205.95.55/storage/${editingPost.file}`);
+      }
     }
   }, [editingPost]);
+
 
   const handleFileSelect = (e) => {
     setFile(e.target.files[0]);
@@ -82,7 +92,7 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
     try {
       if (editingPost) {
         form.append("_method", "PUT");   // ⭐ REQUIRED ⭐
-        await api.put(`/posts/${editingPost.id}`, form);
+        await api.post(`/posts/${editingPost.id}`, form);
         setStatus({
           open: true,
           type: "success",
