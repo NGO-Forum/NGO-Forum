@@ -12,6 +12,10 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
   const [newImages, setNewImages] = useState([]);
   const [previews, setPreviews] = useState([]);
 
+  // NEW FILE (single file)
+  const [file, setFile] = useState(null);
+  const [oldFile, setOldFile] = useState(null);
+
   const [status, setStatus] = useState({
     open: false,
     type: "success",
@@ -29,11 +33,15 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
       setOldImages(editingPost.images || []);
       setPreviews(
         editingPost.images?.map(
-          (img) => `http://127.0.0.1:8000/storage/${img}`
+          (img) => `http://44.205.95.55/storage/${img}`
         ) || []
       );
     }
   }, [editingPost]);
+
+  const handleFileSelect = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   // Select new images
   const handleImageSelect = (e) => {
@@ -41,7 +49,7 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
     setNewImages(files);
 
     setPreviews([
-      ...oldImages.map((img) => `http://127.0.0.1:8000/storage/${img}`),
+      ...oldImages.map((img) => `http://44.205.95.55/storage/${img}`),
       ...files.map((file) => URL.createObjectURL(file)),
     ]);
   };
@@ -55,6 +63,11 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
     form.append("description", description);
     form.append("published_at", publishedAt);
     form.append("department", department);
+
+    // Single FILE
+    if (file) {
+      form.append("file", file);
+    }
 
     // Keep old images
     oldImages.forEach((img, i) => {
@@ -139,6 +152,27 @@ export default function PostForm({ editingPost, onSaved, onCancel }) {
               className="border px-3 py-2 rounded-lg"
               value={publishedAt}
               onChange={(e) => setPublishedAt(e.target.value)}
+            />
+          </div>
+
+          {/* FILE UPLOAD */}
+          <div className="flex flex-col">
+            <label className="font-semibold mb-1">File (PDF/DOC/Image)</label>
+
+            {oldFile && (
+              <a
+                href={oldFile}
+                target="_blank"
+                className="text-blue-600 underline mb-2"
+              >
+                View existing file
+              </a>
+            )}
+
+            <input
+              type="file"
+              className="border p-2 rounded-lg"
+              onChange={handleFileSelect}
             />
           </div>
 

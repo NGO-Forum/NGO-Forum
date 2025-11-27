@@ -4,19 +4,19 @@ import PDFThumbnail from "../components/PDFThumbnail";
 
 export default function MediaContact() {
   const [contacts, setContacts] = useState([]);
-  const [documents, setDocuments] = useState({ data: [] });
+  const [documents, setDocuments] = useState([]); // array only
   const [types, setTypes] = useState([]);
   const [years, setYears] = useState([]);
 
   const [filterType, setFilterType] = useState("");
   const [filterYear, setFilterYear] = useState("");
 
-  // Pagination States
+  // Pagination
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
 
   const imgUrl = (path) =>
-    path ? `http://127.0.0.1:8000/storage/${path}` : "/images/no-image.png";
+    path ? `http://44.205.95.55/storage/${path}` : "/images/no-image.png";
 
   // -------------------------------------------------------
   // LOAD CONTACT PEOPLE
@@ -42,7 +42,7 @@ export default function MediaContact() {
   };
 
   // -------------------------------------------------------
-  // LOAD PAGINATED DOCUMENTS
+  // LOAD DOCUMENTS (NEW API FORMAT)
   // -------------------------------------------------------
   const loadDocuments = async () => {
     try {
@@ -54,30 +54,36 @@ export default function MediaContact() {
         },
       });
 
-      const paginated = res.data.data;
+      // Backend returns:
+      // data: [...documents...]
+      // current_page
+      // last_page
+      // total
+      setDocuments(res.data.data);
+      setPage(res.data.current_page);
+      setLastPage(res.data.last_page);
 
-      setDocuments(paginated.data);
-      setPage(paginated.current_page);
-      setLastPage(paginated.last_page);
-
-      setTypes(res.data.types);
-      setYears(res.data.years);
+      // If you want types/years filters, load them separately or remove them.
+      // Currently your backend does NOT return them.
+      // So we empty them:
+      setTypes([]);
+      setYears([]);
 
     } catch (err) {
       console.error("Failed to load documents:", err);
     }
   };
 
-
   // Load contacts once
   useEffect(() => {
     loadContacts();
   }, []);
 
-  // Load documents whenever page changes
+  // Load documents whenever filters or page changes
   useEffect(() => {
     loadDocuments();
   }, [page, filterType, filterYear]);
+
 
 
   return (
@@ -177,7 +183,7 @@ export default function MediaContact() {
         {/* DOCUMENT CARDS */}
         <div className="col-span-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
 
-          {(documents.data || []).map((doc) => (
+          {documents.map((doc) => (
             <div
               key={doc.id}
               className="relative bg-white rounded-br-3xl rounded-bl-3xl 
@@ -192,7 +198,7 @@ export default function MediaContact() {
               </div>
 
               {/* THUMBNAIL */}
-              <PDFThumbnail fileUrl={`http://127.0.0.1:8000/file/${doc.file_kh}`} className="w-full lg:h-[350px] h-[200px] md:h-[300px]" />
+              <PDFThumbnail fileUrl={`http://44.205.95.55/storage/${doc.file_kh}`} className="w-full lg:h-[350px] h-[200px] md:h-[300px]" />
               {/* <img src={imgUrl(doc.thumbnail)} className="w-full lg:h-[350px] h-[200px] md:h-[300px]" /> */}
 
               {/* TITLE */}

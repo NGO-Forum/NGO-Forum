@@ -14,7 +14,7 @@ export default function Libray() {
   const [lastPage, setLastPage] = useState(1);
 
   const imgUrl = (p) =>
-    p ? `http://127.0.0.1:8000/storage/${p}` : "/images/no-image.png";
+    p ? `http://44.205.95.55/storage/${p}` : "/images/no-image.png";
 
   const loadDocuments = async () => {
     try {
@@ -112,10 +112,9 @@ export default function Libray() {
                 {doc.type}
               </div>
 
-              <PDFThumbnail
-                fileUrl={`http://127.0.0.1:8000/file/${doc.file_kh}`}
-                className="w-full lg:h-[350px] h-[200px] md:h-[300px]"
-              />
+              {doc.file_kh && (
+                <PDFThumbnail fileUrl={`http://44.205.95.55/storage/${doc.file_kh}`} />
+              )}
 
               <p className="mt-2 text-center font-semibold text-gray-800 line-clamp-2">
                 {doc.title}

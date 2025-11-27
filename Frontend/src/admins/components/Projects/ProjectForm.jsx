@@ -327,7 +327,7 @@ export default function ProjectForm({ project, onClose, onSave }) {
                             "
                                     >
                                         <img
-                                            src={`http://127.0.0.1:8000/storage/${img}`}
+                                            src={`http://44.205.95.55/storage/${img}`}
                                             className="w-full h-32 object-cover transition group-hover:brightness-75"
                                         />
 

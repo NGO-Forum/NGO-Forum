@@ -16,7 +16,7 @@ export default function Volunteer() {
       {/* HERO IMAGE + TITLE */}
       <div className="relative w-full h-[100px] sm:h-[150px] lg:h-[180px]">
         <img
-          src="/images/GetInvolved/bg.jpg"
+          src="/images/GetInvolved/volunteer.PNG"
           alt="Volunteer Banner"
           className="w-full h-full object-cover"
         />
@@ -47,7 +47,7 @@ export default function Volunteer() {
               <div className="flex justify-center">
                 {v.img ? (
                   <img
-                    src={`http://127.0.0.1:8000/storage/${v.img}`}
+                    src={`http://44.205.95.55/storage/${v.img}`}
                     alt={v.name}
                     className="w-48 h-48 object-cover rounded-full border-2 border-green-600"
                   />
@@ -109,7 +109,7 @@ export default function Volunteer() {
               <img
                 src={
                   selectedVolunteer.img
-                    ? `http://127.0.0.1:8000/storage/${selectedVolunteer.img}`
+                    ? `http://44.205.95.55/storage/${selectedVolunteer.img}`
                     : "/images/icon.jpg"
                 }
                 className="w-40 md:w-48 h-40 md:h-48 object-cover rounded-full border-4 border-green-600 shadow"

@@ -7,7 +7,7 @@ export default function PostCard({ post }) {
   const [fullscreen, setFullscreen] = useState(false);
   const imgUrl = (path) => {
     if (!path) return "/images/no-image.png";
-    return `http://127.0.0.1:8000/storage/${path}`;
+    return `http://44.205.95.55/storage/${path}`;
   };
 
   useEffect(() => {

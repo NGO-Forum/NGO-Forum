@@ -4,7 +4,7 @@ import { api } from "../../../API/api";
 import MenuButton from "../MenuButton";
 import DeleteConfirmModal from "../DeleteConfirmModal";
 
-const APP_URL = import.meta.env.VITE_APP_URL || "http://127.0.0.1:8000";
+const APP_URL = import.meta.env.VITE_APP_URL || "http://44.205.95.55";
 
 export default function DocumentTable({ documents, setEditDoc, onDelete }) {
   const [showDelete, setShowDelete] = useState(false);
@@ -61,18 +61,23 @@ export default function DocumentTable({ documents, setEditDoc, onDelete }) {
               </td>
 
               <td className="px-4 py-1 space-x-2">
-                <a
-                  href={`${APP_URL}/storage/${doc.file_kh}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100 hover:bg-emerald-100"
-                >
-                  KH
-                </a>
 
-                {doc.file_en && (
+                {/* KH FILE */}
+                {doc.file_kh_url && (
                   <a
-                    href={`${APP_URL}/storage/${doc.file_en}`}
+                    href={doc.file_kh_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100 hover:bg-emerald-100"
+                  >
+                    KH
+                  </a>
+                )}
+
+                {/* EN FILE */}
+                {doc.file_en_url && (
+                  <a
+                    href={doc.file_en_url}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 hover:bg-indigo-100"
@@ -80,6 +85,7 @@ export default function DocumentTable({ documents, setEditDoc, onDelete }) {
                     EN
                   </a>
                 )}
+
               </td>
 
               <td className="px-2 py-1 text-center">

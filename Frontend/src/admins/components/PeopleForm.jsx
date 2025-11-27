@@ -221,7 +221,7 @@ export default function PeopleForm({
                 src={
                   form.img instanceof File
                     ? URL.createObjectURL(form.img)
-                    : `http://127.0.0.1:8000/storage/${form.img}`
+                    : `http://44.205.95.55/storage/${form.img}`
                 }
                 className="w-full h-full object-cover"
               />

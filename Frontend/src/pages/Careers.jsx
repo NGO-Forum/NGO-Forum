@@ -65,7 +65,7 @@ export default function Careers() {
               <div className="flex items-center gap-4">
                 {job.image ? (
                   <img
-                    src={`http://127.0.0.1:8000/storage/${job.image}`}
+                    src={`http://44.205.95.55/storage/${job.image}`}
                     alt={job.title}
                     className="w-16 h-16 object-cover rounded-xl border"
                   />
